@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:movienight/models/place.dart';
 import 'package:movienight/screens/countries_places_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
+import 'package:movienight/screens/movie_screen.dart';
 import 'package:movienight/screens/place_detail_screen.dart';
 import 'package:movienight/screens/settings_screen.dart';
 import 'package:movienight/screens/tabs_screen.dart';
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.COUNTRY_PLACES: (ctx) => CountryPlacesScreen(),
         AppRoutes.PLACES_DETAIL: (ctx) => PlaceDetailScreen(),
         AppRoutes.SETTINGS: (ctx) => const SettingsScreen(),
-        AppRoutes.LOGIN: (ctx) => LoginScreen()
+        AppRoutes.LOGIN: (ctx) => LoginScreen(),
+        AppRoutes.MOVIE: (ctx) => MovieScreen()
       },
     );
   }

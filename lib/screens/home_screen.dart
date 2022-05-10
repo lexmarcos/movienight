@@ -1,6 +1,7 @@
 import 'package:movienight/components/country_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:movienight/components/movie_cover.dart';
 import '../data/my_data.dart';
 import '../utils/app_routes.dart';
 
@@ -9,34 +10,21 @@ class CountriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Trending Movies'),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+              child: Text(
+                'Trending Movies',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              )),
+        ),
         CarouselSlider(
-            items: [
-              Container(
-                margin: EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://br.web.img3.acsta.net/pictures/22/02/14/18/29/1382589.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(6.0),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        "https://br.web.img3.acsta.net/pictures/22/02/14/18/29/1382589.png"),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ],
+            items: MOVIES.map((movie) {
+              return MovieCover(movie);
+            }).toList(),
             options: CarouselOptions(
-              height: 350.0,
+              height: 420.0,
               enlargeCenterPage: true,
               autoPlay: false,
               aspectRatio: 4 / 5,
@@ -45,36 +33,36 @@ class CountriesScreen extends StatelessWidget {
               //autoPlayAnimationDuration: Duration(milliseconds: 800),
               viewportFraction: 0.8,
             )),
-        Text('All Movies'),
-        Container(
-          height: 50,
-          width: 250,
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(20)),
-          child: FlatButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
-            },
-            child: Text(
-              'Movie Route',
-              style: TextStyle(color: Colors.black, fontSize: 25),
-            ),
-          ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+              child: Text(
+                'All Movies',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              )),
         ),
-        Expanded(
-          child: GridView.count(
-            // Create a grid with 2 columns. If you change the scrollDirection to
-            // horizontal, this produces 2 rows.
-            crossAxisCount: 2,
-            // Generate 100 widgets that display their index in the List.
-            children: List.generate(6, (index) {
-              return Center(
-                child: Text(
-                  'Item $index',
-                  style: Theme.of(context).textTheme.headline5,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          child: Container(
+            height: 120,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(10)),
+            child: Container(
+              width: 60,
+              height: 120,
+              margin: EdgeInsets.all(6.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                image: DecorationImage(
+                  image: NetworkImage(
+                      'https://image.tmdb.org/t/p/original/tuzKA9K5Ae9IzaA0R9oAgbyhAI3.jpg'),
+                  fit: BoxFit.cover,
                 ),
-              );
-            }),
+              ),
+            ),
           ),
         )
       ],

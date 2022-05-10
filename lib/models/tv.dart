@@ -11,15 +11,14 @@ class TV extends Show {
   final int numberOfEpisodes;
 
   const TV(
-      {required String id,
+      {required int id,
       required String title,
-      required List<Genre> genreIds,
-      required int popularity,
+      required double popularity,
       required String posterPath,
       required String overview,
       required String status,
       required String tagline,
-      required int voteAverage,
+      required double voteAverage,
       required this.realeaseDate,
       required this.numberOfEpisodes,
       required this.firstAirDate,
@@ -28,7 +27,6 @@ class TV extends Show {
       : super(
           id: id,
           title: title,
-          genreIds: genreIds,
           popularity: popularity,
           posterPath: posterPath,
           overview: overview,

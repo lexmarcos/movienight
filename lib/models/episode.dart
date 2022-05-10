@@ -7,7 +7,7 @@ class Episode {
   final String stillPath;
   final String overview;
   final int episodeNumber;
-  final int voteAverage;
+  final double voteAverage;
 
   const Episode(
       {required this.id,
