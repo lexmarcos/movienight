@@ -29,9 +29,12 @@ class CountriesScreen extends StatelessWidget {
               options: CarouselOptions(
                 height: 420.0,
                 enlargeCenterPage: true,
-                autoPlay: false,
-                aspectRatio: 4 / 5,
+                autoPlay: true,
+                autoPlayInterval: Duration(seconds: 5),
+                autoPlayAnimationDuration: Duration(milliseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
+                aspectRatio: 4 / 5,
+
                 enableInfiniteScroll: false,
                 //autoPlayAnimationDuration: Duration(milliseconds: 800),
                 viewportFraction: 0.8,
