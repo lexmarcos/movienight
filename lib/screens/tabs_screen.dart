@@ -13,7 +13,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _indexSelectedScreen = 0;
 
-  List<Widget> _screens = [CountriesScreen(), MovieScreen(), ProfileScreen()];
+  List<Widget> _screens = [CountriesScreen(), ProfileScreen()];
 
   _selectScreen(int index) {
     setState(() {
@@ -36,7 +36,6 @@ class _TabsScreenState extends State<TabsScreen> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Movie'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
         ],
       ),
