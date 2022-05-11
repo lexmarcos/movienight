@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:movienight/models/tv.dart';
+
+import 'movie.dart';
 
 class User {
-  final String id;
+  final int id;
   final String username;
   final String password;
-  final String watchedMovies;
-  final String watchedTvs;
-  final int totalTimeWatched;
+  final List<Movie> watchedMovies;
+  final List<TV> watchedTvs;
+  int totalTimeWatched;
 
-  const User(
-      {required this.id,
-      required this.username,
-      required this.totalTimeWatched,
-      required this.password,
-      required this.watchedMovies,
-      required this.watchedTvs});
+  User(this.id, this.username, this.password, this.watchedMovies, this.watchedTvs, this.totalTimeWatched);
+      
+  void addWatchMovie(Movie movie) {
+    watchedMovies.add(movie);
+    totalTimeWatched += movie.runtime;
+  }
+  
 }

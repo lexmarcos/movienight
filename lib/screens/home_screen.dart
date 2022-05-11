@@ -3,7 +3,9 @@ import 'package:movienight/components/country_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movienight/components/movie_cover.dart';
+import 'package:provider/provider.dart';
 import '../data/my_data.dart';
+import '../models/UserStore.dart';
 import '../utils/app_routes.dart';
 
 // TESTING - HENRY
@@ -13,6 +15,19 @@ class CountriesScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          Consumer<UserStore>(
+            builder: (context, user, child) {
+                return Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 15),
+                  child: Text(
+                    'Hi ${user.user.username}!',
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+            );
+              },
+          ),
           const Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -30,8 +45,8 @@ class CountriesScreen extends StatelessWidget {
                 height: 420.0,
                 enlargeCenterPage: true,
                 autoPlay: true,
-                autoPlayInterval: Duration(seconds: 5),
-                autoPlayAnimationDuration: Duration(milliseconds: 800),
+                autoPlayInterval: const Duration(seconds: 5),
+                autoPlayAnimationDuration: const Duration(milliseconds: 800),
                 autoPlayCurve: Curves.fastOutSlowIn,
                 aspectRatio: 4 / 5,
 
