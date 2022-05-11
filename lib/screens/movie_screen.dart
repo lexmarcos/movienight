@@ -25,15 +25,15 @@ class MovieScreen extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
                 child: Column(children: [
                   Align(
                     alignment: Alignment.center,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Text(
                         arguments.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 40, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
@@ -50,15 +50,15 @@ class MovieScreen extends StatelessWidget {
                             ' | ' +
                             arguments.runtime.toString() +
                             ' minutes',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Color.fromARGB(150, 255, 255, 255))),
                   ),
                 ])),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: Column(
                 children: [
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Text('Sinopse',
                         style: TextStyle(
@@ -67,7 +67,7 @@ class MovieScreen extends StatelessWidget {
                   Align(
                       alignment: Alignment.centerLeft,
                       child: Text(arguments.overview,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color.fromARGB(200, 255, 255, 255)))),
                 ],
               ),
@@ -79,7 +79,7 @@ class MovieScreen extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
           child: ElevatedButton(
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 'Já assisti !',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               )),
