@@ -24,11 +24,12 @@ class CardMovie extends StatelessWidget {
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(10)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     width: 80,
                     height: 120,
-                    margin: const EdgeInsets.all(6.0),
+                    margin: const EdgeInsets.all(6),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
@@ -38,36 +39,33 @@ class CardMovie extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.only(left: 16, top: 24),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                                movie.title.length > 15
-                                    ? movie.title.replaceRange(
-                                        15, movie.title.length, '...')
-                                    : movie.title,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.left,
-                              ),
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            movie.title.length > 20
+                                ? movie.title
+                                    .replaceRange(20, movie.title.length, '...')
+                                : movie.title,
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                              movie.realeaseDate +
-                                  ' | ' +
-                                  movie.voteAverage.toString() +
-                                  ' | ' +
-                                  movie.runtime.toString() +
-                                  ' m',
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(fontSize: 14),
-                            ),
+                            movie.realeaseDate +
+                                ' | ' +
+                                movie.voteAverage.toString() +
+                                ' | ' +
+                                movie.runtime.toString() +
+                                ' m',
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(fontSize: 14),
+                          ),
                         )
                       ],
                     ),
