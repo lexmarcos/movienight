@@ -27,12 +27,14 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(
               color: Color.fromARGB(255, 32, 32, 32),
               titleTextStyle: TextStyle(color: Colors.white),
-              iconTheme: IconThemeData(color: const Color.fromARGB(255, 255, 255, 255)), systemOverlayStyle: SystemUiOverlayStyle.light,
+              iconTheme: IconThemeData(
+                  color: const Color.fromARGB(255, 255, 255, 255)),
+              systemOverlayStyle: SystemUiOverlayStyle.light,
             ),
-            scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
+            scaffoldBackgroundColor: Color.fromRGBO(28, 30, 32, 1),
             colorScheme: ColorScheme.fromSwatch().copyWith(
                 brightness: Brightness.dark,
-                primary: const Color.fromARGB(255, 32, 32, 32),
+                primary: const Color.fromARGB(255, 35, 38, 43),
                 secondary: const Color.fromARGB(255, 255, 255, 255))),
         themeMode: ThemeMode.dark,
         initialRoute: '/login',

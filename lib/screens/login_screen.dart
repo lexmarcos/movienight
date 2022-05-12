@@ -57,60 +57,127 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     Widget _logo() {
-      return Center(
-        child: SizedBox(
-          child: Image.network(
-              'https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png'),
-          height: 100,
-        ),
+      return Column(
+        children: [
+          SizedBox(
+            child: Image.network(
+                'https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png'),
+            height: 100,
+          ),
+          Text("MovieNight", style: TextStyle(fontSize: 24)),
+        ],
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Login',
-          style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+    return Stack(children: [
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+                'https://image.tmdb.org/t/p/original/5ZuctJh5uX5L2dz1CjA7WsTJwZk.jpg'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Color.fromARGB(178, 0, 0, 0), BlendMode.darken),
+          ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                children: [
-                  _logo(),
-                  TextField(
-                    onChanged: (String text) {
-                      setUsername(text);
-                    },
-                    decoration: const InputDecoration(
-                      labelStyle: TextStyle(color: Colors.white),
-                      enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)),
-                      labelText: 'Username',
-                    ),
-                  ),
-                  SizedBox(height: 32),
-                  TextField(
-                    onChanged: (String text) {
-                      setPassword(text);
-                    },
-                    obscureText: true,
-                    decoration: const InputDecoration(
+      Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Column(
+                  children: [
+                    _logo(),
+                    TextField(
+                      onChanged: (String text) {
+                        setUsername(text);
+                      },
+                      decoration: const InputDecoration(
                         labelStyle: TextStyle(color: Colors.white),
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
-                        labelText: 'Password',
-                        hintText: 'Safe password goes here...'),
+                        labelText: 'Username',
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    TextField(
+                      onChanged: (String text) {
+                        setPassword(text);
+                      },
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
+                          labelText: 'Password',
+                          hintText: 'Safe password goes here...'),
+                    ),
+                    SizedBox(height: 80),
+                    _loginButton(),
+                  ],
+                ),
+                SizedBox(height: 40),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?"),
+                    Text("Sign Up",
+                        style: TextStyle(
+                            color: Color(0xE3E50914),
+                            fontWeight: FontWeight.w600)),
+                  ],
+                ),
+              ],
+            ),
+          ))
+    ]);
+  }
+}
+
+/*child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Column(
+              children: [
+                _logo(),
+                TextField(
+                  onChanged: (String text) {
+                    setUsername(text);
+                  },
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    labelText: 'Username',
                   ),
-                  /*Container(
+                ),
+                SizedBox(height: 32),
+                TextField(
+                  onChanged: (String text) {
+                    setPassword(text);
+                  },
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      labelText: 'Password',
+                      hintText: 'Safe password goes here...'),
+                ),
+                /*Container(
                     height: 50,
                     width: 250,
                     decoration: BoxDecoration(
@@ -129,25 +196,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),*/
-                  SizedBox(height: 80),
-                  _loginButton(),
-                ],
-              ),
-              SizedBox(height: 40),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("Don't have an account?"),
-                  Text("Sign Up",
-                      style: TextStyle(
-                          color: Color(0xE3E50914),
-                          fontWeight: FontWeight.w600)),
-                ],
-              ),
-            ],
-          ),
+                SizedBox(height: 80),
+                _loginButton(),
+              ],
+            ),
+            SizedBox(height: 40),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("Don't have an account?"),
+                Text("Sign Up",
+                    style: TextStyle(
+                        color: Color(0xE3E50914), fontWeight: FontWeight.w600)),
+              ],
+            ),
+          ],
         ),
-      ),
-    );
-  }
-}
+      ),*/

@@ -34,7 +34,7 @@ class MainDrawer extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondary,
             alignment: Alignment.bottomRight,
             child: Text(
-              'Vamos viajar?',
+              'MovieNight',
               style: TextStyle(
                   fontWeight: FontWeight.w900,
                   fontSize: 30,
