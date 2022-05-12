@@ -2,7 +2,6 @@
 
 import 'package:movienight/models/genre.dart';
 import 'package:movienight/models/movie.dart';
-import 'package:movienight/models/place.dart';
 import 'package:flutter/material.dart';
 
 List<Movie> MOVIES = [
