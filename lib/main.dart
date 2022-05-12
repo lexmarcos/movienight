@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
                   color: const Color.fromARGB(255, 255, 255, 255)),
               systemOverlayStyle: SystemUiOverlayStyle.light,
             ),
-            scaffoldBackgroundColor: Color.fromRGBO(28, 30, 32, 1),
+            scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
             colorScheme: ColorScheme.fromSwatch().copyWith(
                 brightness: Brightness.dark,
                 primary: const Color.fromARGB(255, 35, 38, 43),
