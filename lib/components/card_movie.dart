@@ -61,8 +61,8 @@ class CardMovie extends StatelessWidget {
                                 ' | ' +
                                 movie.voteAverage.toString() +
                                 ' | ' +
-                                movie.runtime.toString() +
-                                ' m',
+                                getTimeString(movie.runtime) +
+                                ' hours',
                             textAlign: TextAlign.left,
                             style: const TextStyle(fontSize: 14),
                           ),

@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
                         return MovieCover(movie);
                       }).toList(),
                       options: CarouselOptions(
-                        height: 420.0,
+                        height: 470.0,
                         enlargeCenterPage: true,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 5),

@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../components/aspect_ratio_movie_card.dart';
-import '../data/my_data.dart';
 import '../models/UserStore.dart';
+import '../utils/app_routes.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
-  String getTimeString(int value) {
-    final int hour = value ~/ 60;
-    final int minutes = value % 60;
-    return '${hour.toString().padLeft(2, "0")}:${minutes.toString().padLeft(2, "0")}';
-  }
 
   @override
   Widget build(BuildContext context) {
