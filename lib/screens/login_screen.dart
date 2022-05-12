@@ -30,100 +30,186 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    doLogin(){
+    doLogin() {
       final store = context.read<UserStore>();
-          store.login(username, password);
+      store.login(username, password);
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Login',
-          style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+
+    Widget _loginButton() {
+      return Container(
+          width: double.infinity,
+          height: 52,
+          decoration: BoxDecoration(
+              color: Color(0xE3E50914),
+              borderRadius: BorderRadius.all(Radius.circular(8))),
+          child: TextButton(
+              onPressed: () {
+                doLogin();
+                Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+              },
+              child: Text(
+                'Login',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18),
+              )));
+    }
+
+    Widget _logo() {
+      return Column(
+        children: [
+          SizedBox(
+            child: Image.network(
+                'https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png'),
+            height: 100,
+          ),
+          Text("MovieNight", style: TextStyle(fontSize: 24)),
+        ],
+      );
+    }
+
+    return Stack(children: [
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+                'https://image.tmdb.org/t/p/original/5ZuctJh5uX5L2dz1CjA7WsTJwZk.jpg'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+                Color.fromARGB(178, 0, 0, 0), BlendMode.darken),
+          ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Center(
-                child: SizedBox(
-                    width: 200,
-                    height: 150,
-                    child: Image.asset('logo.png')),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 25),
-              child: TextField(
-                onChanged: (String text) {
-                  setUsername(text);
-                },
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    labelText: 'Username',),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              //padding: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                onChanged: (String text) {
-                  setPassword(text);
-                },
-                obscureText: true,
-                decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: Colors.white),
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    labelText: 'Password',
-                    hintText: 'Informe uma senha segura'),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 25),
-              child: TextButton(
-                onPressed: () {
-                  //TODO FORGOT PASSWORD SCREEN GOES HERE
-                },
-                child: const Text(
-                  'Forgot Password',
-                  style: TextStyle(color: Colors.white, fontSize: 15),
+      Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Column(
+                  children: [
+                    _logo(),
+                    TextField(
+                      onChanged: (String text) {
+                        setUsername(text);
+                      },
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(color: Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        labelText: 'Username',
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    TextField(
+                      onChanged: (String text) {
+                        setPassword(text);
+                      },
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white)),
+                          labelText: 'Password',
+                          hintText: 'Safe password goes here...'),
+                    ),
+                    SizedBox(height: 80),
+                    _loginButton(),
+                  ],
                 ),
-              ),
-            ),
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                SizedBox(height: 40),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?"),
+                    Text("Sign Up",
+                        style: TextStyle(
+                            color: Color(0xE3E50914),
+                            fontWeight: FontWeight.w600)),
+                  ],
                 ),
-                onPressed: () {
-                  doLogin();
-                  Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
-                },
-                child: const Text(
-                  'Login',
-                  style: TextStyle(color: Colors.black, fontSize: 25),
-                ),
-              ),
+              ],
             ),
-            const SizedBox(
-              height: 130,
-            ),
-            const Text('Novo usuário? Criar uma conta')
-          ],
-        ),
-      ),
-    );
+          ))
+    ]);
   }
 }
+
+/*child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            Column(
+              children: [
+                _logo(),
+                TextField(
+                  onChanged: (String text) {
+                    setUsername(text);
+                  },
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    labelText: 'Username',
+                  ),
+                ),
+                SizedBox(height: 32),
+                TextField(
+                  onChanged: (String text) {
+                    setPassword(text);
+                  },
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      labelText: 'Password',
+                      hintText: 'Safe password goes here...'),
+                ),
+                /*Container(
+                    height: 50,
+                    width: 250,
+                    decoration: BoxDecoration(
+                        color: Colors.white, borderRadius: BorderRadius.circular(20)),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.white),
+                      ),
+                      onPressed: () {
+                        doLogin();
+                        Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.black, fontSize: 25),
+                      ),
+                    ),
+                  ),*/
+                SizedBox(height: 80),
+                _loginButton(),
+              ],
+            ),
+            SizedBox(height: 40),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text("Don't have an account?"),
+                Text("Sign Up",
+                    style: TextStyle(
+                        color: Color(0xE3E50914), fontWeight: FontWeight.w600)),
+              ],
+            ),
+          ],
+        ),
+      ),*/
