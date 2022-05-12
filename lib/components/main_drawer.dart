@@ -1,54 +1,59 @@
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/settings_screen.dart';
-
 class MainDrawer extends StatelessWidget {
-  Widget _createItem(IconData icon, String label, Function() onTap) {
+  final _name = 'Tonguinha da Silva';
+  final _urlImage =
+      'https://static.generated.photos/vue-static/face-generator/landing/wall/20.jpg';
+
+  Widget buildMenuItem(
+      {required String text,
+      required IconData icon,
+      required Function() onTap}) {
+    final color = Colors.white;
     return ListTile(
-      leading: Icon(
-        icon,
-        size: 26,
-      ),
+      leading: Icon(icon, color: color),
       title: Text(
-        label,
-        style: TextStyle(
-          fontFamily: 'RobotoCondensed',
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
+        text,
+        style: TextStyle(color: color),
       ),
       onTap: onTap,
     );
   }
 
+  Widget buildDrawerHeader({required name, required urlImage}) {
+    return InkWell(
+        child: Container(
+      child: Row(children: [
+        CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
+        SizedBox(
+          width: 24,
+        ),
+        Text(name)
+      ]),
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
+        child: Material(
+      child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 40),
         children: [
-          Container(
-            height: 120,
-            width: double.infinity,
-            padding: EdgeInsets.all(40),
-            color: Theme.of(context).colorScheme.secondary,
-            alignment: Alignment.bottomRight,
-            child: Text(
-              'MovieNight',
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Theme.of(context).colorScheme.primary),
-            ),
+          buildDrawerHeader(name: _name, urlImage: _urlImage),
+          const SizedBox(height: 24),
+          Divider(
+            height: 3,
+            thickness: 1,
+            color: Colors.grey,
           ),
-          _createItem(Icons.place, 'Login',
-              () => Navigator.of(context).pushNamed(AppRoutes.LOGIN)),
-          _createItem(Icons.place, 'Lugares',
-              () => Navigator.of(context).pushNamed(AppRoutes.SETTINGS)),
-          _createItem(Icons.settings, 'Configurações',
-              () => Navigator.of(context).pushNamed(AppRoutes.SETTINGS))
+          buildMenuItem(
+              text: 'Login',
+              icon: Icons.login,
+              onTap: () => Navigator.of(context).pushNamed(AppRoutes.LOGIN)),
         ],
       ),
-    );
+    ));
   }
 }
