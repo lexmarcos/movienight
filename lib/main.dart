@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:movienight/models/place.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
 import 'package:movienight/screens/tabs_screen.dart';
