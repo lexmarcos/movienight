@@ -1,4 +1,3 @@
-import 'package:movienight/screens/countries_places_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,18 +24,18 @@ class MovieCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(AppRoutes.MOVIE, arguments: movie),
+      onTap: () =>
+          Navigator.of(context).pushNamed(AppRoutes.MOVIE, arguments: movie),
       child: Container(
-      margin: EdgeInsets.all(6.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        image: DecorationImage(
-          image: NetworkImage(
-              movie.posterPath),
-          fit: BoxFit.cover,
+        margin: EdgeInsets.all(6.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          image: DecorationImage(
+            image: NetworkImage(movie.posterPath),
+            fit: BoxFit.cover,
+          ),
         ),
       ),
-    ),
     );
   }
 }
