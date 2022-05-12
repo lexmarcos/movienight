@@ -13,7 +13,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _indexSelectedScreen = 0;
 
-  List<Widget> _screens = [CountriesScreen(), ProfileScreen()];
+  List<Widget> _screens = [Home(), ProfileScreen()];
 
   _selectScreen(int index) {
     setState(() {

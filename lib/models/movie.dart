@@ -27,4 +27,18 @@ class Movie extends Show {
           tagline: tagline,
           voteAverage: voteAverage,
         );
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+          id: json['id'],
+          title: json['title'],
+          popularity: json['popularity'],
+          posterPath: json['poster_path'],
+          overview: json['overview'],
+          status: json['status'],
+          tagline: json['tagline'],
+          voteAverage: json['vote_average'],
+          realeaseDate: json['release_date'],
+          runtime: json['runtime']
+    );
+  }
 }
