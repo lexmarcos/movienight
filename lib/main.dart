@@ -1,21 +1,18 @@
 import 'package:flutter/services.dart';
-import 'package:movienight/models/place.dart';
-import 'package:movienight/screens/countries_places_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
-import 'package:movienight/screens/place_detail_screen.dart';
-import 'package:movienight/screens/settings_screen.dart';
 import 'package:movienight/screens/tabs_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/UserStore.dart';
-import 'screens/home_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -28,10 +25,10 @@ class MyApp extends StatelessWidget {
               color: Color.fromARGB(255, 32, 32, 32),
               titleTextStyle: TextStyle(color: Colors.white),
               iconTheme: IconThemeData(
-                  color: const Color.fromARGB(255, 255, 255, 255)),
+                  color: Color.fromARGB(255, 255, 255, 255)),
               systemOverlayStyle: SystemUiOverlayStyle.light,
             ),
-            scaffoldBackgroundColor: Color.fromRGBO(28, 30, 32, 1),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
             colorScheme: ColorScheme.fromSwatch().copyWith(
                 brightness: Brightness.dark,
                 primary: const Color.fromARGB(255, 35, 38, 43),
@@ -40,11 +37,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/login',
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
-          AppRoutes.COUNTRY_PLACES: (ctx) => CountryPlacesScreen(),
-          AppRoutes.PLACES_DETAIL: (ctx) => PlaceDetailScreen(),
-          AppRoutes.SETTINGS: (ctx) => const SettingsScreen(),
-          AppRoutes.LOGIN: (ctx) => LoginScreen(),
-          AppRoutes.MOVIE: (ctx) => MovieScreen()
+          AppRoutes.LOGIN: (ctx) => const LoginScreen(),
+          AppRoutes.MOVIE: (ctx) => const MovieScreen()
         },
       ),
     );

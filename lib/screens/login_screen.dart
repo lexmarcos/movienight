@@ -39,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return Container(
           width: double.infinity,
           height: 52,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               color: Color(0xE3E50914),
               borderRadius: BorderRadius.all(Radius.circular(8))),
           child: TextButton(
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 doLogin();
                 Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
               },
-              child: Text(
+              child: const Text(
                 'Login',
                 style: TextStyle(
                     color: Colors.white,
@@ -64,14 +64,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 'https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png'),
             height: 100,
           ),
-          Text("MovieNight", style: TextStyle(fontSize: 24)),
+          const Text("MovieNight", style: TextStyle(fontSize: 24)),
         ],
       );
     }
 
     return Stack(children: [
       Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(
                 'https://image.tmdb.org/t/p/original/5ZuctJh5uX5L2dz1CjA7WsTJwZk.jpg'),
@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelText: 'Username',
                       ),
                     ),
-                    SizedBox(height: 32),
+                    const SizedBox(height: 32),
                     TextField(
                       onChanged: (String text) {
                         setPassword(text);
@@ -119,14 +119,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           labelText: 'Password',
                           hintText: 'Safe password goes here...'),
                     ),
-                    SizedBox(height: 80),
+                    const SizedBox(height: 80),
                     _loginButton(),
                   ],
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text("Don't have an account?"),
                     Text("Sign Up",
                         style: TextStyle(

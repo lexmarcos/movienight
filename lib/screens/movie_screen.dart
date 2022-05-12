@@ -32,7 +32,12 @@ class _MovieScreenState extends State<MovieScreen> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text(arguments.title),
+          title: Text(
+            arguments.title.length > 20
+                ? arguments.title
+                    .replaceRange(20, arguments.title.length, '...')
+                : arguments.title,
+          ),
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -58,8 +63,8 @@ class _MovieScreenState extends State<MovieScreen> {
                 ),
                 child: Stack(alignment: Alignment.center, children: [
                   Text(arguments.voteAverage.toString(),
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                      style: const TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 16)),
                   SizedBox(
@@ -68,7 +73,7 @@ class _MovieScreenState extends State<MovieScreen> {
                     child: CircularProgressIndicator(
                         strokeWidth: 6,
                         value: (arguments.voteAverage / 10),
-                        color: Theme.of(context).colorScheme.primary),
+                        color: Colors.white),
                   ),
                 ])),
             Container(
@@ -149,12 +154,15 @@ class _MovieScreenState extends State<MovieScreen> {
                   backgroundColor: MaterialStateProperty.all(
                       user.user.watchedMovies.contains(arguments) ||
                               isMovieWatched
-                          ? Color.fromARGB(255, 120, 22, 22)
+                          ? Theme.of(context).colorScheme.primary
                           : const Color.fromARGB(255, 255, 17, 0)),
                 ),
-                child: const Text(
-                  'ALREADY WATCHED !',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                child: Text(
+                  user.user.watchedMovies.contains(arguments) || isMovieWatched
+                      ? 'Movie is already in your list.'
+                      : 'ALREADY WATCHED !',
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
                 ));
           }),
         ));

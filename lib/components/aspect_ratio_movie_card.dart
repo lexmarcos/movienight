@@ -1,4 +1,3 @@
-import 'package:movienight/screens/countries_places_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

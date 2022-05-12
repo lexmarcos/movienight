@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Screen extends StatelessWidget {
+  const Screen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,7 +11,7 @@ class Screen extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width,
           height: 100,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fill,
               image: NetworkImage(

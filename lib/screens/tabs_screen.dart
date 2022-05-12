@@ -25,7 +25,8 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MovieNight'),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
       ),
       body: _screens[_indexSelectedScreen],
       bottomNavigationBar: BottomNavigationBar(

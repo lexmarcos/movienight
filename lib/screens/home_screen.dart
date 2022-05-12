@@ -40,7 +40,8 @@ class _HomeState extends State<Home> {
               id: movieJson['id'],
               title: movieJson['title'],
               popularity: movieJson['popularity'],
-              posterPath: 'https://image.tmdb.org/t/p/original/' + movieJson['poster_path'],
+              posterPath: 'https://image.tmdb.org/t/p/original/' +
+                  movieJson['poster_path'],
               overview: movieJson['overview'],
               status: movieJson['status'],
               tagline: movieJson['tagline'],
@@ -109,7 +110,7 @@ class _HomeState extends State<Home> {
                         return MovieCover(movie);
                       }).toList(),
                       options: CarouselOptions(
-                        height: 470.0,
+                        height: 480.0,
                         enlargeCenterPage: true,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 5),
