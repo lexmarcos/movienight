@@ -1,6 +1,9 @@
 import 'package:flutter/services.dart';
+import 'package:movienight/screens/cart_screen.dart';
+import 'package:movienight/screens/movie_products_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
+import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/tabs_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +27,8 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(
               color: Color.fromARGB(255, 32, 32, 32),
               titleTextStyle: TextStyle(color: Colors.white),
-              iconTheme: IconThemeData(
-                  color: Color.fromARGB(255, 255, 255, 255)),
+              iconTheme:
+                  IconThemeData(color: Color.fromARGB(255, 255, 255, 255)),
               systemOverlayStyle: SystemUiOverlayStyle.light,
             ),
             scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
@@ -38,7 +41,9 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
           AppRoutes.LOGIN: (ctx) => const LoginScreen(),
-          AppRoutes.MOVIE: (ctx) => const MovieScreen()
+          AppRoutes.MOVIE: (ctx) => const MovieScreen(),
+          AppRoutes.PRODUCTS: (ctx) => const MovieProductsScreen(),
+          AppRoutes.CART: (ctx) => const CartScreen(),
         },
       ),
     );

@@ -65,7 +65,8 @@ class CardMovie extends StatelessWidget {
                             textAlign: TextAlign.left,
                             style: const TextStyle(fontSize: 14),
                           ),
-                        )
+                        ),
+                        Text("R\$ 29,99"),
                       ],
                     ),
                   )
