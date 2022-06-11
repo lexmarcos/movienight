@@ -5,6 +5,8 @@ class AppRoutes {
   static const SETTINGS = '/settings';
   static const LOGIN = '/login';
   static const MOVIE = '/movie';
+  static const PRODUCTS = '/products';
+  static const CART = '/cart';
 }
 
 String getTimeString(int value) {

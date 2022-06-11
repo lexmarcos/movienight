@@ -140,31 +140,50 @@ class _MovieScreenState extends State<MovieScreen> {
         bottomNavigationBar: Container(
           height: 70,
           color: Theme.of(context).colorScheme.primary,
-          child: Consumer<UserStore>(builder: (context, user, child) {
-            print(user.user.watchedMovies.contains(arguments));
-            return ElevatedButton(
-                onPressed: user.user.watchedMovies.contains(arguments) ||
-                        isMovieWatched
-                    ? null
-                    : () {
-                        setIsMovieWatched();
-                        addMovieToWatched();
-                      },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      user.user.watchedMovies.contains(arguments) ||
-                              isMovieWatched
-                          ? Theme.of(context).colorScheme.primary
-                          : const Color.fromARGB(255, 255, 17, 0)),
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  height: double.infinity,
+                  child: Consumer<UserStore>(builder: (context, user, child) {
+                    print(user.user.watchedMovies.contains(arguments));
+                    return ElevatedButton(
+                        onPressed:
+                            user.user.watchedMovies.contains(arguments) ||
+                                    isMovieWatched
+                                ? null
+                                : () {
+                                    setIsMovieWatched();
+                                    addMovieToWatched();
+                                  },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              user.user.watchedMovies.contains(arguments) ||
+                                      isMovieWatched
+                                  ? Theme.of(context).colorScheme.primary
+                                  : const Color.fromARGB(255, 255, 17, 0)),
+                        ),
+                        child: Text(
+                          user.user.watchedMovies.contains(arguments) ||
+                                  isMovieWatched
+                              ? 'Movie is already in your list.'
+                              : 'ALREADY WATCHED !',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
+                        ));
+                  }),
                 ),
-                child: Text(
-                  user.user.watchedMovies.contains(arguments) || isMovieWatched
-                      ? 'Movie is already in your list.'
-                      : 'ALREADY WATCHED !',
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
-                ));
-          }),
+              ),
+              Expanded(
+                  child: Container(
+                height: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () =>
+                        Navigator.of(context).pushNamed(AppRoutes.PRODUCTS),
+                    child: Text('Comprar produtos')),
+              ))
+            ],
+          ),
         ));
   }
 }
