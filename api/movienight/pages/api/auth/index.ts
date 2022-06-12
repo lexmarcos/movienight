@@ -12,6 +12,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         username
       })
       .toArray()) as unknown as IUser[];
+    console.log('body: ', body)
+    console.log('arrayWithUsers: ', usersWithSameInfos)
     if (usersWithSameInfos.length > 0) {
       return res.status(401).json({ message: 'This user has already an owner' });
     }
