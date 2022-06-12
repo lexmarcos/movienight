@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Center(
-                  child: Text(user.user.username, // VIA PROVIDER?
+                  child: Text(user.user!.username, // VIA PROVIDER?
                       style: const TextStyle(
                           fontSize: 24, fontWeight: FontWeight.w500)),
                 ),
@@ -37,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Column(children: [
-                        Text(getTimeString(user.user.totalTimeWatched),
+                        Text(getTimeString(user.user!.totalTimeWatched),
                             style: const TextStyle(
                                 fontSize: 32, fontWeight: FontWeight.bold)),
                         const SizedBox(height: 3.0),
@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                                 fontSize: 16, fontWeight: FontWeight.normal))
                       ]),
                       Column(children: [
-                        Text(user.user.watchedMovies.length.toString(),
+                        Text(user.user!.watchedMovies.length.toString(),
                             style: const TextStyle(
                                 fontSize: 32, fontWeight: FontWeight.bold)),
                         const SizedBox(height: 3.0),
@@ -69,7 +69,7 @@ class ProfileScreen extends StatelessWidget {
                       height: 200,
                       child: ListView(
                         scrollDirection: Axis.horizontal,
-                        children: user.user.watchedMovies.map((movie) {
+                        children: user.user!.watchedMovies.map((movie) {
                           return AspectRatioMovieCard(movie);
                         }).toList(),
                       )),

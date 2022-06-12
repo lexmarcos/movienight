@@ -146,10 +146,10 @@ class _MovieScreenState extends State<MovieScreen> {
                 child: Container(
                   height: double.infinity,
                   child: Consumer<UserStore>(builder: (context, user, child) {
-                    print(user.user.watchedMovies.contains(arguments));
+                    print(user.user!.watchedMovies.contains(arguments));
                     return ElevatedButton(
                         onPressed:
-                            user.user.watchedMovies.contains(arguments) ||
+                            user.user!.watchedMovies.contains(arguments) ||
                                     isMovieWatched
                                 ? null
                                 : () {
@@ -158,13 +158,13 @@ class _MovieScreenState extends State<MovieScreen> {
                                   },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              user.user.watchedMovies.contains(arguments) ||
+                              user.user!.watchedMovies.contains(arguments) ||
                                       isMovieWatched
                                   ? Theme.of(context).colorScheme.primary
                                   : const Color.fromARGB(255, 255, 17, 0)),
                         ),
                         child: Text(
-                          user.user.watchedMovies.contains(arguments) ||
+                          user.user!.watchedMovies.contains(arguments) ||
                                   isMovieWatched
                               ? 'Movie is already in your list.'
                               : 'ALREADY WATCHED !',

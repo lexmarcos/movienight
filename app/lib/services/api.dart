@@ -18,4 +18,16 @@ class Api {
 
     return response;
   }
+
+  static get(String url) async {
+    final uri = Uri.parse(url);
+    final headers = {'Content-Type': 'application/json'};
+
+    http.Response response = await http.get(
+      uri,
+      headers: headers
+    );
+
+    return response;
+  }
 }

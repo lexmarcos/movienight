@@ -7,8 +7,9 @@ import 'movie.dart';
 import 'package:localstore/localstore.dart';
 
 class UserStore extends ChangeNotifier {
-  late User user;
+  late User? user;
   final db = Localstore.instance;
+
   Future<http.Response> login(String username, String password) async {
     http.Response response =
         await Api.post('https://movienight-theta.vercel.app/api/auth/login', {
@@ -22,8 +23,22 @@ class UserStore extends ChangeNotifier {
       // Saves to localstorage
       db
           .collection('user')
-          .doc(user.id)
+          .doc(user!.id)
           .set(json.decode(response.body)['user']);
+      notifyListeners();
+    }
+    return response;
+  }
+
+  Future<http.Response> logout() async {
+    http.Response response =
+        await Api.get('https://movienight-theta.vercel.app/api/auth/logout');
+    if (response.statusCode == 200) {
+      // Saves to localstorage
+      db
+          .collection('user')
+          .doc(user!.id).delete();
+      user = null;
       notifyListeners();
     }
     return response;
@@ -52,6 +67,6 @@ class UserStore extends ChangeNotifier {
   }
 
   void addWatchMovie(Movie movie) {
-    user.addWatchMovie(movie);
+    user!.addWatchMovie(movie);
   }
 }

@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 45, vertical: 15),
                             child: Text(
-                              'Hi ${user.user.username}!',
+                              'Hi ${user.user!.username}!',
                               style: const TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             )),
