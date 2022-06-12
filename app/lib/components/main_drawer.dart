@@ -1,3 +1,4 @@
+import 'package:http/http.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -38,13 +39,21 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    doLogout() async{
+      final store = context.read<UserStore>();
+      Response response = await store.logout();
+      const CircularProgressIndicator();
+      if (response.statusCode == 200) {
+        Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
+      }
+    }
     final store = context.read<UserStore>();
     return Drawer(
         child: Material(
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
         children: [
-          buildDrawerHeader(name: store.user.username, urlImage: _urlImage),
+          buildDrawerHeader(name: store.user!.username, urlImage: _urlImage),
           const SizedBox(height: 24),
           const Divider(
             height: 3,
@@ -52,9 +61,9 @@ class MainDrawer extends StatelessWidget {
             color: Colors.grey,
           ),
           buildMenuItem(
-              text: 'Login',
+              text: 'Logout',
               icon: Icons.login,
-              onTap: () => Navigator.of(context).pushNamed(AppRoutes.LOGIN)),
+              onTap: () async { await doLogout();}),
         ],
       ),
     ));
