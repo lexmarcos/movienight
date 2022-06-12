@@ -8,6 +8,7 @@ class AppRoutes {
   static const MOVIE = '/movie';
   static const PRODUCTS = '/products';
   static const CART = '/cart';
+  static const FIRSTLOAD = '/firstload';
 }
 
 String getTimeString(int value) {

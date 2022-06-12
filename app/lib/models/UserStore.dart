@@ -4,21 +4,51 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movienight/services/api.dart';
 import 'movie.dart';
+import 'package:localstore/localstore.dart';
 
 class UserStore extends ChangeNotifier {
   late User user;
-
-  Future<http.Response> login(String username, String password) async{
-    http.Response response = await Api.post('https://movienight-theta.vercel.app/api/auth/login', {
+  final db = Localstore.instance;
+  Future<http.Response> login(String username, String password) async {
+    http.Response response =
+        await Api.post('https://movienight-theta.vercel.app/api/auth/login', {
       "username": username,
       "password": password,
     });
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       final Map<String, dynamic> userData = json.decode(response.body)['user'];
       user = User.fromJson(userData);
+
+      // Saves to localstorage
+      db
+          .collection('user')
+          .doc(user.id)
+          .set(json.decode(response.body)['user']);
       notifyListeners();
     }
     return response;
+  }
+
+  Future<bool> hasUserOnLocalStorage() async {
+    final db = Localstore.instance;
+    return db.collection('user').get().then((value) {
+      if (value != null) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  Future<bool> getUserFromLocalStorage() async {
+    final db = Localstore.instance;
+    return db.collection('user').get().then((value) {
+      if (value != null) {
+        user = User.fromJson(value.entries.first.value);
+        return true;
+      }
+      return false;
+    });
   }
 
   void addWatchMovie(Movie movie) {
