@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { IUser } from './types';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  console.log('body 1: ', req.body);
   if (req.method === 'POST') {
     const { username, password } = req.body;
     const db = (await clientPromise).db();
