@@ -31,11 +31,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    doLogin() async{
+    doLogin() async {
       final store = context.read<UserStore>();
       Response response = await store.login(username, password);
       const CircularProgressIndicator();
-      if(response.statusCode == 200) {
+      if (response.statusCode == 200) {
         Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
       }
     }
@@ -50,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextButton(
               onPressed: () {
                 doLogin();
-                
               },
               child: const Text(
                 'Login',
@@ -131,12 +130,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 40),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text("Don't have an account?"),
-                    Text("Sign Up",
-                        style: TextStyle(
-                            color: Color(0xE3E50914),
-                            fontWeight: FontWeight.w600)),
+                  children: [
+                    const Text("Don't have an account?"),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushReplacementNamed(AppRoutes.SIGNUP);
+                      },
+                      child: const Text("Sign Up",
+                          style: TextStyle(
+                              color: Color(0xE3E50914),
+                              fontWeight: FontWeight.w600)),
+                    ),
                   ],
                 ),
               ],

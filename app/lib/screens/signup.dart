@@ -34,11 +34,12 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     doLogin() async {
-      http.Response response = await Api.post('http://localhost:3000/api/auth', {
+      http.Response response =
+          await Api.post('http://localhost:3000/api/auth', {
         "username": username,
         "password": password,
       });
-      if(response.statusCode == 201){
+      if (response.statusCode == 201) {
         Navigator.of(context).pushReplacementNamed(AppRoutes.LOGIN);
       }
     }
@@ -55,7 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 doLogin();
               },
               child: const Text(
-                'Criar conta',
+                'Create account',
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
@@ -80,8 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
       Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(
-                'https://image.tmdb.org/t/p/original/5ZuctJh5uX5L2dz1CjA7WsTJwZk.jpg'),
+            image: NetworkImage('https://i.imgur.com/1IHuUzS.jpg'),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
                 Color.fromARGB(178, 0, 0, 0), BlendMode.darken),
@@ -133,12 +133,18 @@ class _SignupScreenState extends State<SignupScreen> {
                 const SizedBox(height: 40),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text("Don't have an account?"),
-                    Text("Sign Up",
-                        style: TextStyle(
-                            color: Color(0xE3E50914),
-                            fontWeight: FontWeight.w600)),
+                  children: [
+                    const Text("Do you have account?"),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.LOGIN);
+                      },
+                      child: const Text("Login",
+                          style: TextStyle(
+                              color: Color(0xE3E50914),
+                              fontWeight: FontWeight.w600)),
+                    ),
                   ],
                 ),
               ],
