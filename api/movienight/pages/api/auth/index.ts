@@ -12,15 +12,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         username
       })
       .toArray()) as unknown as IUser[];
-    console.log('body: ', req.body)
+    console.log('username:', username)
+      console.log('password:', password)
     console.log('arrayWithUsers: ', usersWithSameInfos)
     if (usersWithSameInfos.length > 0) {
       return res.status(401).json({ message: 'This user has already an owner' });
     }
 
     await db.collection('users').insertOne({
-      username,
-      password,
+      username: username,
+      password: password,
       watchedMovies: [],
       totalTimeWatched: 0
     });
