@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:movienight/screens/cart_screen.dart';
+import 'package:movienight/screens/firstLoad.dart';
 import 'package:movienight/screens/movie_products_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
                 primary: const Color.fromARGB(255, 35, 38, 43),
                 secondary: const Color.fromARGB(255, 255, 255, 255))),
         themeMode: ThemeMode.dark,
-        initialRoute: '/login',
+        initialRoute: '/firstload',
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
           AppRoutes.LOGIN: (ctx) => const LoginScreen(),
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.MOVIE: (ctx) => const MovieScreen(),
           AppRoutes.PRODUCTS: (ctx) => const MovieProductsScreen(),
           AppRoutes.CART: (ctx) => const CartScreen(),
+          AppRoutes.FIRSTLOAD: (ctx) => const FirstLoad(),
         },
       ),
     );
