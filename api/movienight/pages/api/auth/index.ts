@@ -17,17 +17,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const usersWithSameInfos = (await db
       .collection('users')
       .find({
-        username
+        username: req.body['username']
       })
       .toArray()) as unknown as IUser[];
-      console.log(usersWithSameInfos)
     if (usersWithSameInfos.length > 0) {
       return res.status(401).json({ message: 'This user has already an owner' });
     }
 
     await db.collection('users').insertOne({
-      username,
-      password,
+      username: req.body['username'],
+      password: req.body['password'],
       watchedMovies: [],
       totalTimeWatched: 0
     });
