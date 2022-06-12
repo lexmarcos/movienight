@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 import '../models/UserStore.dart';
@@ -30,9 +31,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    doLogin() {
+    doLogin() async{
       final store = context.read<UserStore>();
-      store.login(username, password);
+      Response response = await store.login(username, password);
+      const CircularProgressIndicator();
+      if(response.statusCode == 200) {
+        Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+      }
     }
 
     Widget _loginButton() {
@@ -45,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextButton(
               onPressed: () {
                 doLogin();
-                Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
+                
               },
               child: const Text(
                 'Login',
