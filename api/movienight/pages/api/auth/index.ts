@@ -12,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         username: req.body['username']
       })
       .toArray()) as unknown as IUser[];
+      console.log('body: ', req.body);
     console.log('username:', req.body['username'])
       console.log('password:', req.body['password'])
     console.log('arrayWithUsers: ', usersWithSameInfos)
