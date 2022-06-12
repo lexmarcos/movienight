@@ -8,7 +8,7 @@ import 'movie.dart';
 class UserStore extends ChangeNotifier {
   late User user;
 
-  void login(String username, String password) async{
+  Future<http.Response> login(String username, String password) async{
     http.Response response = await Api.post('https://movienight-theta.vercel.app/api/auth/login', {
       "username": username,
       "password": password,
@@ -18,6 +18,7 @@ class UserStore extends ChangeNotifier {
       user = User.fromJson(userData);
       notifyListeners();
     }
+    return response;
   }
 
   void addWatchMovie(Movie movie) {
