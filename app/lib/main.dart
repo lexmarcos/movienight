@@ -4,6 +4,7 @@ import 'package:movienight/screens/movie_products_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
 import 'package:movienight/screens/cart_screen.dart';
+import 'package:movienight/screens/signup.dart';
 import 'package:movienight/screens/tabs_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoutes.HOME: (ctx) => TabsScreen(),
           AppRoutes.LOGIN: (ctx) => const LoginScreen(),
+          AppRoutes.SIGNUP: (ctx) => const SignupScreen(),
           AppRoutes.MOVIE: (ctx) => const MovieScreen(),
           AppRoutes.PRODUCTS: (ctx) => const MovieProductsScreen(),
           AppRoutes.CART: (ctx) => const CartScreen(),

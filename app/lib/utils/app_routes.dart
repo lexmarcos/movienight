@@ -4,6 +4,7 @@ class AppRoutes {
   static const PLACES_DETAIL = '/place-detail';
   static const SETTINGS = '/settings';
   static const LOGIN = '/login';
+  static const SIGNUP = '/signup';
   static const MOVIE = '/movie';
   static const PRODUCTS = '/products';
   static const CART = '/cart';
