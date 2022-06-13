@@ -6,6 +6,6 @@ export interface IStoreItem {
 }
 
 export interface IStoreItemBody {
-  movieID: string;
+  movieID: number;
   item: IStoreItem;
 }

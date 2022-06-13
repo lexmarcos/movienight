@@ -3,9 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:localstore/localstore.dart';
 
 class Api {
-  
-
-  static Future<String> getTokenOfUser(){
+  static Future<String> getTokenOfUser() {
     final db = Localstore.instance;
     return db.collection('user').get().then((value) {
       if (value != null) {
@@ -34,8 +32,9 @@ class Api {
     return response;
   }
 
-  static get(String url) async {
-    final uri = Uri.parse(url);
+  static get(String url, {Map<String, dynamic>? params}) async {
+    var uri = Uri.https('https://movienight-theta.vercel.app/', url, params);
+    print(uri);
     final headers = {'Content-Type': 'application/json', 'x-access-token': await getTokenOfUser()};
 
     http.Response response = await http.get(
