@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:movienight/models/movie.dart';
+import 'package:movienight/models/CartStore.dart';
 import 'package:movienight/models/product.dart';
 import 'package:movienight/services/api.dart';
 import 'package:movienight/utils/app_routes.dart';
+import 'package:provider/provider.dart';
 
 class MovieProductsScreen extends StatefulWidget {
   const MovieProductsScreen({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
     final arguments = ModalRoute.of(context)!.settings.arguments as Movie;
 
     Response response =
-        await Api.get('http://localhost:3000/api/stores/', params: {
+        await Api.get('/api/stores', params: {
       'movieID': arguments.id.toString(),
     });
     if (response.statusCode == 200) {
@@ -53,50 +55,58 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
       products = _products;
     });
   }
-  
+
+  Widget renderProducts() {
+    if (products != null) {
+      return Column(
+        children: [
+          Flexible(
+            child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: products!.length,
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CircleAvatar(
+                              radius: 40,
+                              backgroundImage:
+                                  NetworkImage(products![index].imageUrl)),
+                          Text(products![index].name),
+                          Text('R\$ ${products![index].price}'),
+                          IconButton(
+                              onPressed: () {
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        'Adicionou produto ${products![index].name} ao carrinho')));
+                                final product = context.read<CartStore>();
+                                product.addToCart(products![index]);
+                              },
+                              icon: Icon(Icons.add_circle))
+                        ]),
+                  );
+                })),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.CART);
+              },
+              child: Text('Check Cart'))
+        ],
+      );
+    }
+    return const Text('Loading products...');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text('Movie Products'),
         ),
-        body: Column(
-          children: [
-            Flexible(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: Product.products.length,
-                  itemBuilder: ((context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CircleAvatar(
-                                radius: 40,
-                                backgroundImage: NetworkImage(
-                                    Product.products[index].imageUrl)),
-                            Text(Product.products[index].name),
-                            Text('R\$ ${Product.products[index].price}'),
-                            IconButton(
-                                onPressed: () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(
-                                              'Adicionou produto ${Product.products[index].name} ao carrinho')));
-                                },
-                                icon: Icon(Icons.add_circle))
-                          ]),
-                    );
-                  })),
-            ),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.CART);
-                },
-                child: Text('Check Cart'))
-          ],
-        ));
+        body: Center(child: renderProducts()));
   }
 }

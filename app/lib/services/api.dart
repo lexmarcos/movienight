@@ -33,7 +33,7 @@ class Api {
   }
 
   static get(String url, {Map<String, dynamic>? params}) async {
-    var uri = Uri.http('localhost:3000', '/api/stores', params);
+    var uri = Uri.https('https://movienight-theta.vercel.app/', url, params);
     print(uri);
     final headers = {'Content-Type': 'application/json', 'x-access-token': await getTokenOfUser()};
 

@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'models/UserStore.dart';
+import 'models/CartStore.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,8 +21,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => UserStore(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserStore()),
+        ChangeNotifierProvider(create: (context) => CartStore())
+      ],
       child: MaterialApp(
         title: 'MovieNight',
         theme: ThemeData(brightness: Brightness.light),
