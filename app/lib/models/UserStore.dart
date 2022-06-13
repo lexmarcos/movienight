@@ -12,7 +12,7 @@ class UserStore extends ChangeNotifier {
 
   Future<http.Response> login(String username, String password) async {
     http.Response response =
-        await Api.post('https://movienight-theta.vercel.app/api/auth/login', {
+        await Api.post('http://localhost:3000/api/auth/login', {
       "username": username,
       "password": password,
     });
@@ -32,7 +32,7 @@ class UserStore extends ChangeNotifier {
 
   Future<http.Response> logout() async {
     http.Response response =
-        await Api.get('https://movienight-theta.vercel.app/api/auth/logout');
+        await Api.get('/api/auth/logout');
     if (response.statusCode == 200) {
       // Saves to localstorage
       db

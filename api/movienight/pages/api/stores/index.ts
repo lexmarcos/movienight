@@ -3,7 +3,7 @@ import clientPromise from '../../../libs/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { decodeJWT } from '../../../utils/verifyJWT';
 import { IToken } from '../auth/types';
-import { ObjectId } from 'mongodb';
+import { Int32, ObjectId } from 'mongodb';
 import NextCors from 'nextjs-cors';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -33,8 +33,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!token) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
+    console.log(req.query);
+    const { movieID } = req.query;
+    console.log(movieID);
     const db = (await clientPromise).db();
-    const stores = await db.collection('stores').find().toArray() as unknown as IStoreItem[];
-    return res.status(200).json({ stores });
+    
+    const store = await db.collection('stores').findOne({ movieID: new Int32(movieID as string) }) as unknown as IStoreItem;
+    console.log(store);
+    if(store === null){
+      return res.status(200).json({ store: {
+        products: []
+      } })
+    }
+    return res.status(200).json({ store });
   }
 }

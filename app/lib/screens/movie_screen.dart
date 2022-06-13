@@ -179,7 +179,7 @@ class _MovieScreenState extends State<MovieScreen> {
                 height: double.infinity,
                 child: ElevatedButton(
                     onPressed: () =>
-                        Navigator.of(context).pushNamed(AppRoutes.PRODUCTS),
+                        Navigator.of(context).pushNamed(AppRoutes.PRODUCTS, arguments: arguments),
                     child: Text('Comprar produtos')),
               ))
             ],
