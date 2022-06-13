@@ -33,13 +33,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (!token) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
-    console.log(req.query);
     const { movieID } = req.query;
-    console.log(movieID);
     const db = (await clientPromise).db();
     
     const store = await db.collection('stores').findOne({ movieID: new Int32(movieID as string) }) as unknown as IStoreItem;
-    console.log(store);
     if(store === null){
       return res.status(200).json({ store: {
         products: []

@@ -4,7 +4,6 @@ import 'package:movienight/screens/firstLoad.dart';
 import 'package:movienight/screens/movie_products_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
-import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/signup.dart';
 import 'package:movienight/screens/tabs_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
@@ -13,8 +12,12 @@ import 'package:provider/provider.dart';
 
 import 'models/UserStore.dart';
 import 'models/CartStore.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() => runApp(MyApp());
+Future main() async {
+  runApp(const MyApp());
+  await dotenv.load(fileName: ".env");
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

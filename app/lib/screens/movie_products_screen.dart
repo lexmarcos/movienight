@@ -22,7 +22,7 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
     final arguments = ModalRoute.of(context)!.settings.arguments as Movie;
 
     Response response =
-        await Api.get('/api/stores', params: {
+        await Api.get('/stores', params: {
       'movieID': arguments.id.toString(),
     });
     if (response.statusCode == 200) {
