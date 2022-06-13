@@ -30,6 +30,8 @@ class _MovieScreenState extends State<MovieScreen> {
       contador.addWatchMovie(arguments);
     }
 
+    print("MOVIE ID - ${arguments.id}");
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -178,8 +180,8 @@ class _MovieScreenState extends State<MovieScreen> {
                   child: Container(
                 height: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed(AppRoutes.PRODUCTS, arguments: arguments),
+                    onPressed: () => Navigator.of(context)
+                        .pushNamed(AppRoutes.PRODUCTS, arguments: arguments),
                     child: Text('Comprar produtos')),
               ))
             ],
