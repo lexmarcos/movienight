@@ -35,9 +35,7 @@ class UserStore extends ChangeNotifier {
         await Api.get('https://movienight-theta.vercel.app/api/auth/logout');
     if (response.statusCode == 200) {
       // Saves to localstorage
-      db
-          .collection('user')
-          .doc(user!.id).delete();
+      db.collection('user').doc(user!.id).delete();
       user = null;
       notifyListeners();
     }
@@ -68,5 +66,9 @@ class UserStore extends ChangeNotifier {
 
   void addWatchMovie(Movie movie) {
     user!.addWatchMovie(movie);
+  }
+
+  void removeWatchMovie(Movie movie) {
+    user!.removeWatchMovie(movie);
   }
 }
