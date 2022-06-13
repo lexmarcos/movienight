@@ -35,7 +35,7 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget build(BuildContext context) {
     doLogin() async {
       http.Response response =
-          await Api.post('https://movienight-theta.vercel.app/api/auth', {
+          await Api.post('/auth', {
         "username": username,
         "password": password,
       });
