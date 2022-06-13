@@ -64,7 +64,7 @@ class _CartScreenState extends State<CartScreen> {
                   Text('Total',
                       style:
                           TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-                  Text('R\$ ${cart.totalPrice}')
+                  Text('R\$ ${cart.totalPrice.toStringAsFixed(2)}')
                 ],
               )
             ],
