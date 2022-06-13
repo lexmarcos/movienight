@@ -11,8 +11,7 @@ class UserStore extends ChangeNotifier {
   final db = Localstore.instance;
 
   Future<http.Response> login(String username, String password) async {
-    http.Response response =
-        await Api.post('/auth/login', {
+    http.Response response = await Api.post('/auth/login', {
       "username": username,
       "password": password,
     });
@@ -31,8 +30,7 @@ class UserStore extends ChangeNotifier {
   }
 
   Future<http.Response> logout() async {
-    http.Response response =
-        await Api.get('/auth/logout');
+    http.Response response = await Api.get('/auth/logout');
     if (response.statusCode == 200) {
       // Saves to localstorage
       db.collection('user').doc(user!.id).delete();
@@ -70,5 +68,6 @@ class UserStore extends ChangeNotifier {
 
   void removeWatchMovie(Movie movie) {
     user!.removeWatchMovie(movie);
+    notifyListeners();
   }
 }
