@@ -17,17 +17,16 @@ class _CartScreenState extends State<CartScreen> {
           title: Text('Cart'),
         ),
         body: Consumer<CartStore>(builder: (context, cart, child) {
-          return Column(
-            children: [
-              Flexible(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: cart.productsOnCart.length,
-                    itemBuilder: ((context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 10),
-                        child: Column(
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Column(
+              children: [
+                Flexible(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: cart.productsOnCart.length,
+                      itemBuilder: ((context, index) {
+                        return Column(
                           children: [
                             Row(children: [
                               CircleAvatar(
@@ -54,20 +53,22 @@ class _CartScreenState extends State<CartScreen> {
                                   icon: Icon(Icons.add_circle))
                             ]),
                           ],
-                        ),
-                      );
-                    })),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Total',
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-                  Text('R\$ ${cart.totalPrice.toStringAsFixed(2)}')
-                ],
-              )
-            ],
+                        );
+                      })),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Total',
+                        style: TextStyle(
+                            fontSize: 32, fontWeight: FontWeight.bold)),
+                    Text('R\$ ${cart.totalPrice.toStringAsFixed(2)}',
+                        style: TextStyle(
+                            fontSize: 32, fontWeight: FontWeight.bold))
+                  ],
+                )
+              ],
+            ),
           );
         }));
   }

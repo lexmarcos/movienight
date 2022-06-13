@@ -1,4 +1,5 @@
 import 'package:movienight/components/main_drawer.dart';
+import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/home_screen.dart';
 import 'package:movienight/screens/profile_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
@@ -14,7 +15,7 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   int _indexSelectedScreen = 0;
 
-  List<Widget> _screens = [Home(), ProfileScreen(), MovieProductsScreen()];
+  List<Widget> _screens = [Home(), ProfileScreen(), CartScreen()];
 
   _selectScreen(int index) {
     setState(() {
@@ -40,7 +41,7 @@ class _TabsScreenState extends State<TabsScreen> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart), label: 'Movie Products'),
+              icon: Icon(Icons.shopping_cart), label: 'Cart'),
         ],
       ),
       drawer: MainDrawer(),
