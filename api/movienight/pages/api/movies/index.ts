@@ -34,7 +34,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     return res.status(201).json({ message: 'Movie added', user });
   } if (req.method === 'DELETE') {
-    console.log('aqui')
     const movieID = parseInt(req.query.id as string);
     const db = (await clientPromise).db();
     const user = (await db.collection('users').findOne({ _id: new ObjectId(token._id) })) as unknown as IUser;
