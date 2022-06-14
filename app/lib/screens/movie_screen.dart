@@ -24,14 +24,15 @@ class _MovieScreenState extends State<MovieScreen> {
   }
 
   bool checkIfMovieIsWatched(User user, Movie movie) {
-    Iterable<Movie> movieFounded = user.watchedMovies.where((element) => element.id == movie.id);
-    if(movieFounded.isNotEmpty) {
+    Iterable<Movie> movieFounded =
+        user.watchedMovies.where((element) => element.id == movie.id);
+    if (movieFounded.isNotEmpty) {
       return true;
     } else {
       return false;
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     if (ModalRoute.of(context)!.settings.arguments == Null) {}
@@ -41,6 +42,7 @@ class _MovieScreenState extends State<MovieScreen> {
       await store.insertMovie(arguments);
       setIsMovieWatched();
     }
+
     addMovieToWatched() {
       final contador = context.read<UserStore>();
       contador.addWatchMovie(arguments);
@@ -164,7 +166,6 @@ class _MovieScreenState extends State<MovieScreen> {
                 child: Container(
                   height: double.infinity,
                   child: Consumer<UserStore>(builder: (context, user, child) {
-
                     return ElevatedButton(
                         onPressed:
                             checkIfMovieIsWatched(user.user!, arguments) ||
@@ -177,28 +178,40 @@ class _MovieScreenState extends State<MovieScreen> {
                           backgroundColor: MaterialStateProperty.all(
                               checkIfMovieIsWatched(user.user!, arguments) ||
                                       isMovieWatched
-                                  ? Theme.of(context).colorScheme.primary
+                                  ? const Color.fromARGB(255, 0, 0, 0)
                                   : const Color.fromARGB(255, 255, 17, 0)),
                         ),
                         child: Text(
-                          checkIfMovieIsWatched(user.user!, arguments) ||
-                                  isMovieWatched
-                              ? 'Movie is already in your list.'
-                              : 'ALREADY WATCHED !',
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ));
+                            checkIfMovieIsWatched(user.user!, arguments) ||
+                                    isMovieWatched
+                                ? 'Movie watched'
+                                : 'ADD TO WATCHED',
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: checkIfMovieIsWatched(
+                                            user.user!, arguments) ||
+                                        isMovieWatched
+                                    ? const Color.fromARGB(255, 122, 122, 122)
+                                    : Color.fromARGB(255, 255, 255, 255))));
                   }),
                 ),
               ),
               Expanded(
                   child: Container(
-                height: double.infinity,
-                child: ElevatedButton(
-                    onPressed: () => Navigator.of(context)
-                        .pushNamed(AppRoutes.PRODUCTS, arguments: arguments),
-                    child: Text('Comprar produtos')),
-              ))
+                      height: double.infinity,
+                      child: ElevatedButton(
+                          onPressed: () => Navigator.of(context).pushNamed(
+                              AppRoutes.PRODUCTS,
+                              arguments: arguments),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all(
+                                  const Color.fromARGB(255, 255, 255, 255))),
+                          child: const Text(
+                            'Comprar produtos',
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 255, 17, 0)),
+                          ))))
             ],
           ),
         ));

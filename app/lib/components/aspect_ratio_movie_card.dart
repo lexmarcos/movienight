@@ -31,7 +31,7 @@ class AspectRatioMovieCard extends StatelessWidget {
         ),
         ElevatedButton(
             onPressed: () {
-              context.read<UserStore>().removeWatchMovie(movie);
+              context.read<UserStore>().removeMovie(movie.id);
             },
             child: Text('Remove'))
       ],
