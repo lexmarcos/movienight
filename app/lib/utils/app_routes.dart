@@ -11,6 +11,7 @@ class AppRoutes {
   static const CART = '/cart';
   static const FIRSTLOAD = '/firstload';
   static const EDITUSER = '/edituser';
+  static const SUCCESS_BUY = '/success-buy';
 }
 
 String getTimeString(int value) {

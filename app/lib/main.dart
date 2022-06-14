@@ -3,6 +3,7 @@ import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/firstLoad.dart';
 import 'package:movienight/screens/edit_user.dart';
 import 'package:movienight/screens/movie_products_screen.dart';
+import 'package:movienight/screens/success_buy_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
 import 'package:movienight/screens/signup.dart';
@@ -58,6 +59,7 @@ class MyApp extends StatelessWidget {
           AppRoutes.CART: (ctx) => const CartScreen(),
           AppRoutes.FIRSTLOAD: (ctx) => const FirstLoad(),
           AppRoutes.EDITUSER: (ctx) => const EditUser(),
+          AppRoutes.SUCCESS_BUY: (ctx) => const SuccessBuy(),
         },
       ),
     );
