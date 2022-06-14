@@ -74,13 +74,33 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
                             radius: 40,
                             backgroundImage:
                                 NetworkImage(products![index].imageUrl)),
-                        Text(products![index].name,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w400)),
-                        Text(
-                          'R\$ ${products![index].price}',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w500),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(products![index].name.length > 24
+                                    ? products![index].name
+                                        .replaceRange(24, products![index].name.length, '...')
+                                    : products![index].name,
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w800)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'R\$ ${products![index].price}',
+                                  style: TextStyle(
+                                      fontSize: 18, fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         IconButton(
                             iconSize: 32,
