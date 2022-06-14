@@ -81,6 +81,7 @@ class _CartScreenState extends State<CartScreen> {
                   onPressed: () {
                     Navigator.of(context).pushNamed(AppRoutes.SUCCESS_BUY,
                         arguments: cart.totalPrice.toStringAsFixed(2));
+                    cart.removeAllProducts();
                   },
                   child: Text(
                     'Buy!',

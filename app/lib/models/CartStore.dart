@@ -40,4 +40,10 @@ class CartStore extends ChangeNotifier {
     calculateTotal();
     notifyListeners();
   }
+
+  void removeAllProducts() {
+    productsOnCart.clear();
+    calculateTotal();
+    notifyListeners();
+  }
 }
