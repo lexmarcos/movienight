@@ -12,18 +12,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Options
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
     origin: '*',
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
- });
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  });
+  const token = decodeJWT(req) as unknown as IToken;
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
   if (req.method === 'POST') {
-    const token = decodeJWT(req) as unknown as IToken;
-    if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
     const data = req.body as IMovie;
     const db = (await clientPromise).db();
-    const user = await db.collection('users').findOne({ _id: new ObjectId(token._id) }) as unknown as IUser;
+    const user = (await db.collection('users').findOne({ _id: new ObjectId(token._id) })) as unknown as IUser;
 
-    if(!user){
+    if (!user) {
       return res.status(403).json({ message: 'User not found' });
     }
 
@@ -33,21 +33,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await db.collection('users').updateOne({ _id: new ObjectId(token._id) }, { $set: { watchedMovies: user.watchedMovies, totalTimeWatched: user.totalTimeWatched } });
 
     return res.status(201).json({ message: 'Movie added', user });
-  }else if(req.method === 'DELETE') {
-    const token = decodeJWT(req) as unknown as IToken;
-    if (!token) {
-      return res.status(401).json({ message: 'Unauthorized' });
-    }
-    const movieID = req.query.id as string;
+  } if (req.method === 'DELETE') {
+    console.log('aqui')
+    const movieID = parseInt(req.query.id as string);
     const db = (await clientPromise).db();
-    const user = await db.collection('users').findOne({ _id: new ObjectId(token._id) }) as unknown as IUser;
+    const user = (await db.collection('users').findOne({ _id: new ObjectId(token._id) })) as unknown as IUser;
 
-    if(!user){
+    if (!user) {
       return res.status(403).json({ message: 'User not found' });
     }
 
-    await db.collection('users').updateOne({ _id: new ObjectId(token._id) }, { $pull: { watchedMovies: {id: movieID} } });
+    const movieToRemove = user.watchedMovies.find((movie) => movie.id === movieID);
+    if (!movieToRemove) {
+      return res.status(404).json({ message: 'Movie not found' });
+    }
+    user.watchedMovies = user.watchedMovies.filter((item) => item.id !== movieID);
+    console.log(user.totalTimeWatched, movieToRemove.runtime)
+    user.totalTimeWatched = user.totalTimeWatched - movieToRemove.runtime;
 
-    return res.status(201).json({ message: 'Movie added', user });
+    await db.collection('users').updateOne({ _id: new ObjectId(token._id) }, { $pull: { watchedMovies: { id: movieID } }, $set: { totalTimeWatched: user.totalTimeWatched } });
+
+    return res.status(200).json({ message: 'Movie added', user });
   }
 }

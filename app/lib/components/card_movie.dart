@@ -50,20 +50,29 @@ class CardMovie extends StatelessWidget {
                                     .replaceRange(20, movie.title.length, '...')
                                 : movie.title,
                             style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
-                        Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            movie.realeaseDate +
-                                ' | ' +
+                                movie.tagline.length > 30
+                                    ? movie.tagline
+                                        .replaceRange(30, movie.tagline.length, '...')
+                                    : movie.tagline,
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(fontSize: 12, color: Color.fromARGB(124, 255, 255, 255)),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
                                 movie.voteAverage.toString() +
                                 ' | ' +
                                 getTimeString(movie.runtime) +
                                 ' hours',
                             textAlign: TextAlign.left,
-                            style: const TextStyle(fontSize: 14),
+                            style: const TextStyle(fontSize: 12, color: Color.fromARGB(124, 255, 255, 255)),
                           ),
                         ),
                       ],

@@ -99,6 +99,23 @@ class UserStore extends ChangeNotifier {
     return response;
   }
 
+  Future<http.Response> removeMovie(int id) async {
+    http.Response response = await Api.delete('/movies', params: {
+      'id': id.toString(),
+    });
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> userData = json.decode(response.body)['user'];
+      user = User.fromJson(userData);
+      // Saves to localstorage
+      db
+          .collection('user')
+          .doc(user!.id)
+          .set(json.decode(response.body)['user']);
+      notifyListeners();
+    }
+    return response;
+  }
+
   void addWatchMovie(Movie movie) {
     user!.addWatchMovie(movie);
     notifyListeners();
