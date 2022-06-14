@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/firstLoad.dart';
+import 'package:movienight/screens/edit_user.dart';
 import 'package:movienight/screens/movie_products_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
@@ -48,13 +49,15 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.dark,
         initialRoute: '/firstload',
         routes: {
-          AppRoutes.HOME: (ctx) => TabsScreen(),
+          AppRoutes.HOME: (ctx) => const TabsScreen(0),
+          AppRoutes.PROFILE: (ctx) => const TabsScreen(1),
           AppRoutes.LOGIN: (ctx) => const LoginScreen(),
           AppRoutes.SIGNUP: (ctx) => const SignupScreen(),
           AppRoutes.MOVIE: (ctx) => const MovieScreen(),
           AppRoutes.PRODUCTS: (ctx) => const MovieProductsScreen(),
           AppRoutes.CART: (ctx) => const CartScreen(),
           AppRoutes.FIRSTLOAD: (ctx) => const FirstLoad(),
+          AppRoutes.EDITUSER: (ctx) => const EditUser(),
         },
       ),
     );

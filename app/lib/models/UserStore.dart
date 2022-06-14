@@ -35,12 +35,46 @@ class UserStore extends ChangeNotifier {
     return response;
   }
 
+  Future<http.Response> updateUser(String username) async {
+    http.Response response = await Api.put('/user', {
+      "username": username,
+    });
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> userData = json.decode(response.body)['user'];
+      user = User.fromJson(userData);
+
+      // Saves to localstorage
+      db
+          .collection('user')
+          .doc(user!.id)
+          .set(json.decode(response.body)['user']);
+      notifyListeners();
+    }
+    return response;
+  }
+
+  Future<http.Response> deleteAccount(String username) async {
+    http.Response response = await Api.delete('/user', params:{
+      "username": username,
+    });
+    if (response.statusCode == 200) {
+      db.collection('token').doc(user!.id).delete();
+      db.collection('user').doc(user!.id).delete();
+      user = null;
+      token = '';
+      notifyListeners();
+    }
+    return response;
+  }
+
   Future<http.Response> logout() async {
     http.Response response = await Api.get('/auth/logout');
     if (response.statusCode == 200) {
       // Saves to localstorage
+      db.collection('token').doc(user!.id).delete();
       db.collection('user').doc(user!.id).delete();
       user = null;
+      token = '';
       notifyListeners();
     }
     return response;

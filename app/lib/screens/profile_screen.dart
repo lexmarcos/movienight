@@ -10,7 +10,8 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer<UserStore>(
+    return Scaffold(
+      body: Consumer<UserStore>(
       builder: (context, user, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +53,27 @@ class ProfileScreen extends StatelessWidget {
                         TextStyle(fontSize: 16, fontWeight: FontWeight.normal))
               ]),
             ]),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              child: Container(
+                  width: double.infinity/1.5,
+                  height: 52,
+                  decoration: const BoxDecoration(
+                      color: Color(0xE3E50914),
+                      borderRadius: BorderRadius.all(Radius.circular(8))),
+                  child: TextButton(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.EDITUSER);
+                      },
+                      child: const Text(
+                        'Edit user',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                      ))),
+            ),
             const Padding(
                 padding: EdgeInsets.only(left: 45, top: 40, bottom: 24),
                 child: Text(

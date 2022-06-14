@@ -1,5 +1,6 @@
 class AppRoutes {
   static const HOME = '/';
+  static const PROFILE = '/profile';
   static const COUNTRY_PLACES = '/country-places';
   static const PLACES_DETAIL = '/place-detail';
   static const SETTINGS = '/settings';
@@ -9,6 +10,7 @@ class AppRoutes {
   static const PRODUCTS = '/products';
   static const CART = '/cart';
   static const FIRSTLOAD = '/firstload';
+  static const EDITUSER = '/edituser';
 }
 
 String getTimeString(int value) {
