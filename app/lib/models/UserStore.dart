@@ -9,6 +9,7 @@ import 'package:localstore/localstore.dart';
 class UserStore extends ChangeNotifier {
   late User? user;
   final db = Localstore.instance;
+  String token = '';
 
   Future<http.Response> login(String username, String password) async {
     http.Response response = await Api.post('/auth/login', {
@@ -18,6 +19,11 @@ class UserStore extends ChangeNotifier {
     if (response.statusCode == 200) {
       final Map<String, dynamic> userData = json.decode(response.body)['user'];
       user = User.fromJson(userData);
+      token = json.decode(response.body)['token'];
+      db
+          .collection('token')
+          .doc(user!.id)
+          .set({'token': json.decode(response.body)['token']});
 
       // Saves to localstorage
       db
@@ -53,17 +59,49 @@ class UserStore extends ChangeNotifier {
 
   Future<bool> getUserFromLocalStorage() async {
     final db = Localstore.instance;
-    return db.collection('user').get().then((value) {
+    db.collection('user').get().then((value) {
       if (value != null) {
         user = User.fromJson(value.entries.first.value);
+      }
+    });
+    return db.collection('token').get().then((value) {
+      if (value != null) {
+        token = value.entries.first.value['token'];
         return true;
       }
       return false;
     });
   }
 
+  Future<http.Response> insertMovie(Movie movie) async {
+    http.Response response = await Api.post('/movies', {
+      'id': movie.id,
+      'title': movie.title,
+      'popularity': movie.popularity,
+      'posterPath': movie.posterPath,
+      'overview': movie.overview,
+      'status': movie.status,
+      'tagline': movie.tagline,
+      'voteAverage': movie.voteAverage,
+      'realeaseDate': movie.realeaseDate,
+      'runtime': movie.runtime,
+    });
+    if (response.statusCode == 201) {
+      final Map<String, dynamic> userData = json.decode(response.body)['user'];
+      user = User.fromJson(userData);
+      // Saves to localstorage
+      db
+          .collection('user')
+          .doc(user!.id)
+          .set(json.decode(response.body)['user']);
+      notifyListeners();
+    }
+    return response;
+  }
+
   void addWatchMovie(Movie movie) {
     user!.addWatchMovie(movie);
+    notifyListeners();
   }
 
   void removeWatchMovie(Movie movie) {

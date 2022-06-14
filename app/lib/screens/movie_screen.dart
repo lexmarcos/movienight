@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:movienight/models/movie.dart';
+import 'package:movienight/models/user.dart';
 import 'package:provider/provider.dart';
 
 import '../models/UserStore.dart';
@@ -21,10 +23,24 @@ class _MovieScreenState extends State<MovieScreen> {
     });
   }
 
+  bool checkIfMovieIsWatched(User user, Movie movie) {
+    Iterable<Movie> movieFounded = user.watchedMovies.where((element) => element.id == movie.id);
+    if(movieFounded.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     if (ModalRoute.of(context)!.settings.arguments == Null) {}
     final arguments = ModalRoute.of(context)!.settings.arguments as Movie;
+    insertMovie() async {
+      final store = context.read<UserStore>();
+      await store.insertMovie(arguments);
+      setIsMovieWatched();
+    }
     addMovieToWatched() {
       final contador = context.read<UserStore>();
       contador.addWatchMovie(arguments);
@@ -148,25 +164,24 @@ class _MovieScreenState extends State<MovieScreen> {
                 child: Container(
                   height: double.infinity,
                   child: Consumer<UserStore>(builder: (context, user, child) {
-                    print(user.user!.watchedMovies.contains(arguments));
+
                     return ElevatedButton(
                         onPressed:
-                            user.user!.watchedMovies.contains(arguments) ||
+                            checkIfMovieIsWatched(user.user!, arguments) ||
                                     isMovieWatched
                                 ? null
                                 : () {
-                                    setIsMovieWatched();
-                                    addMovieToWatched();
+                                    insertMovie();
                                   },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(
-                              user.user!.watchedMovies.contains(arguments) ||
+                              checkIfMovieIsWatched(user.user!, arguments) ||
                                       isMovieWatched
                                   ? Theme.of(context).colorScheme.primary
                                   : const Color.fromARGB(255, 255, 17, 0)),
                         ),
                         child: Text(
-                          user.user!.watchedMovies.contains(arguments) ||
+                          checkIfMovieIsWatched(user.user!, arguments) ||
                                   isMovieWatched
                               ? 'Movie is already in your list.'
                               : 'ALREADY WATCHED !',

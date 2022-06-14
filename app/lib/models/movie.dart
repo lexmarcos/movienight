@@ -32,12 +32,12 @@ class Movie extends Show {
           id: json['id'],
           title: json['title'],
           popularity: json['popularity'],
-          posterPath: json['poster_path'],
+          posterPath: json['posterPath'],
           overview: json['overview'],
           status: json['status'],
           tagline: json['tagline'],
-          voteAverage: json['vote_average'],
-          realeaseDate: json['release_date'],
+          voteAverage: json['voteAverage'],
+          realeaseDate: json['realeaseDate'],
           runtime: json['runtime']
     );
   }

@@ -28,6 +28,6 @@ export default async function handler(
     const token = jwt.sign(user, jwtKey as string, {
       expiresIn: "7d" // expires in 7 days
     });
-    return res.json({ auth: true, user: {token, ...user} });
+    return res.json({ auth: true, token, user });
   }
 }

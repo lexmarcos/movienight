@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     const data = req.body as IMovie;
     const db = (await clientPromise).db();
-    const {password, ...user} = await db.collection('users').findOne({ _id: new ObjectId(token._id) }) as unknown as IUser;
+    const user = await db.collection('users').findOne({ _id: new ObjectId(token._id) }) as unknown as IUser;
 
     if(!user){
       return res.status(403).json({ message: 'User not found' });
@@ -31,6 +31,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     user.totalTimeWatched += data.runtime;
 
     await db.collection('users').updateOne({ _id: new ObjectId(token._id) }, { $set: { watchedMovies: user.watchedMovies, totalTimeWatched: user.totalTimeWatched } });
+
+    return res.status(201).json({ message: 'Movie added', user });
+  }else if(req.method === 'DELETE') {
+    const token = decodeJWT(req) as unknown as IToken;
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    const movieID = req.query.id as string;
+    const db = (await clientPromise).db();
+    const user = await db.collection('users').findOne({ _id: new ObjectId(token._id) }) as unknown as IUser;
+
+    if(!user){
+      return res.status(403).json({ message: 'User not found' });
+    }
+
+    await db.collection('users').updateOne({ _id: new ObjectId(token._id) }, { $pull: { watchedMovies: {id: movieID} } });
 
     return res.status(201).json({ message: 'Movie added', user });
   }

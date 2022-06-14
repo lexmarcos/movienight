@@ -10,7 +10,6 @@ class User {
   final List<Movie> watchedMovies;
   final List<TV> watchedTvs;
   int totalTimeWatched;
-  String token;
 
   User(
       {required this.id,
@@ -18,8 +17,7 @@ class User {
       required this.password,
       required this.watchedMovies,
       required this.watchedTvs,
-      required this.totalTimeWatched,
-      required this.token});
+      required this.totalTimeWatched});
 
   void addWatchMovie(Movie movie) {
     watchedMovies.add(movie);
@@ -39,12 +37,11 @@ class User {
       id: json['_id'],
       username: json['username'],
       password: json['password'],
-      watchedMovies: (json['watchedMovies'] as List)
+      watchedMovies: ((json['watchedMovies']) as List)
           .map((movie) => Movie.fromJson(movie))
           .toList(),
       watchedTvs: [],
       totalTimeWatched: json['totalTimeWatched'],
-      token: json['token'],
     );
   }
 }
