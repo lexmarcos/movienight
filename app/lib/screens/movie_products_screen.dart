@@ -80,10 +80,11 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Align(
                                 alignment: Alignment.centerLeft,
-                                child: Text(products![index].name.length > 24
-                                    ? products![index].name
-                                        .replaceRange(24, products![index].name.length, '...')
-                                    : products![index].name,
+                                child: Text(
+                                    products![index].name.length > 24
+                                        ? products![index].name.replaceRange(24,
+                                            products![index].name.length, '...')
+                                        : products![index].name,
                                     style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.w800)),
@@ -94,9 +95,10 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  'R\$ ${products![index].price}',
+                                  'R\$ ${products![index].price.toStringAsFixed(2)}',
                                   style: TextStyle(
-                                      fontSize: 18, fontWeight: FontWeight.w500),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ),
