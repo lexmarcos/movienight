@@ -29,11 +29,14 @@ class AspectRatioMovieCard extends StatelessWidget {
                               image: NetworkImage(movie.posterPath),
                               fit: BoxFit.cover))))),
         ),
-        ElevatedButton(
-            onPressed: () {
-              context.read<UserStore>().removeMovie(movie.id);
-            },
-            child: Text('Remove'))
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: ElevatedButton(
+              onPressed: () {
+                context.read<UserStore>().removeMovie(movie.id);
+              },
+              child: Text('Remove')),
+        )
       ],
     );
   }

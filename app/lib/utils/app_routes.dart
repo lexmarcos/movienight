@@ -12,6 +12,8 @@ class AppRoutes {
   static const FIRSTLOAD = '/firstload';
   static const EDITUSER = '/edituser';
   static const SUCCESS_BUY = '/success-buy';
+  static const ADRESS = '/adress';
+  static const PAYMENT_DETAILS = '/payment';
 }
 
 String getTimeString(int value) {

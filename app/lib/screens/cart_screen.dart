@@ -79,7 +79,7 @@ class _CartScreenState extends State<CartScreen> {
               height: 70,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.SUCCESS_BUY,
+                    Navigator.of(context).pushNamed(AppRoutes.ADRESS,
                         arguments: cart.totalPrice.toStringAsFixed(2));
                     cart.removeAllProducts();
                   },

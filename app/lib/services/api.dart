@@ -96,4 +96,23 @@ class Api {
 
     return response;
   }
+  
+  static getCEP(String url, {Map<String, dynamic>? params}) async {
+    Uri uri;
+    if (dotenv.env['MODE'] == 'DEV') {
+      uri = Uri.http('localhost:3000', "/api$url", params);
+    } else {
+      uri = Uri.https('movienight-theta.vercel.app', "/api$url", params);
+    }
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'x-access-token': await getTokenOfUser()
+    };
+
+    http.Response response = await http.get(uri, headers: headers);
+
+    return response;
+  }
 }
+

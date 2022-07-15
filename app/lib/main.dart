@@ -1,8 +1,10 @@
 import 'package:flutter/services.dart';
+import 'package:movienight/screens/adress_page.dart';
 import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/firstLoad.dart';
 import 'package:movienight/screens/edit_user.dart';
 import 'package:movienight/screens/movie_products_screen.dart';
+import 'package:movienight/screens/payment_details.dart';
 import 'package:movienight/screens/success_buy_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
@@ -60,6 +62,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.FIRSTLOAD: (ctx) => const FirstLoad(),
           AppRoutes.EDITUSER: (ctx) => const EditUser(),
           AppRoutes.SUCCESS_BUY: (ctx) => const SuccessBuy(),
+          AppRoutes.ADRESS: (ctx) => const Adress(),
+          AppRoutes.PAYMENT_DETAILS: (ctx) => const PaymentDetails(),
         },
       ),
     );
