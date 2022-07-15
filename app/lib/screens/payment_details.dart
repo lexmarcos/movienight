@@ -73,7 +73,7 @@ class _PaymentDetailsState extends State<PaymentDetails>
     return Scaffold(body: Consumer<UserStore>(builder: (context, user, child) {
       return SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 64, horizontal: 40),
+          padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -93,8 +93,7 @@ class _PaymentDetailsState extends State<PaymentDetails>
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Lottie.asset("../../assets/lottie/successicon.json",
-                            height: 300, width: 300, animate: true, frameRate: FrameRate.max),
+                        Lottie.network("https://assets1.lottiefiles.com/private_files/lf30_bwku83is.json", animate: true, frameRate: FrameRate.max),
                       ],
                     ),
                   ),
@@ -182,7 +181,7 @@ class _PaymentDetailsState extends State<PaymentDetails>
                         child: TextButton(
                             onPressed: () {
                               Navigator.of(context)
-                                  .pushNamed(AppRoutes.PROFILE);
+                                  .pushNamed(AppRoutes.CART);
                             },
                             child: const Text(
                               'Back',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:lottie/lottie.dart';
 import 'package:movienight/models/cep_data.dart';
 import 'package:movienight/services/apiCEP.dart';
 import 'package:provider/provider.dart';
@@ -58,13 +59,23 @@ class _AdressState extends State<Adress> {
               const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 15),
+                    padding: EdgeInsets.symmetric(vertical: 15),
                     child: Text(
                       'Adress',
-                      style: TextStyle(
-                          fontSize: 40, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                     )),
+              ),
+              Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Lottie.network(
+                        "https://assets3.lottiefiles.com/packages/lf20_svy4ivvy.json",
+                        animate: true,
+                        frameRate: FrameRate.max),
+                  ],
+                ),
               ),
               Column(
                 children: [
@@ -145,16 +156,17 @@ class _AdressState extends State<Adress> {
                         width: double.infinity,
                         height: 52,
                         decoration: const BoxDecoration(
-                            color: Color.fromARGB(226, 255, 255, 255),
+                            color: Color.fromARGB(225, 255, 0, 0),
                             borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: TextButton(
                             onPressed: () {
-                              Navigator.of(context).pushNamed(AppRoutes.PAYMENT_DETAILS);
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.PAYMENT_DETAILS);
                             },
                             child: const Text(
                               'Go To Payment',
                               style: TextStyle(
-                                  color: Color.fromARGB(255, 255, 0, 0),
+                                  color: Color.fromARGB(255, 255, 255, 255),
                                   fontWeight: FontWeight.w600,
                                   fontSize: 18),
                             ))),

@@ -81,8 +81,8 @@ class _MovieProductsScreenState extends State<MovieProductsScreen> {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                    products![index].name.length > 24
-                                        ? products![index].name.replaceRange(24,
+                                    products![index].name.length > 18
+                                        ? products![index].name.replaceRange(18,
                                             products![index].name.length, '...')
                                         : products![index].name,
                                     style: TextStyle(

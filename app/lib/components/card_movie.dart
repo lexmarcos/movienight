@@ -15,7 +15,7 @@ class CardMovie extends StatelessWidget {
         onTap: () =>
             Navigator.of(context).pushNamed(AppRoutes.MOVIE, arguments: movie),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Container(
               height: 120,
               width: MediaQuery.of(context).size.width,
