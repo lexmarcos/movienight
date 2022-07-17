@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:movienight/models/ProductOnCart.dart';
 import 'package:movienight/models/product.dart';

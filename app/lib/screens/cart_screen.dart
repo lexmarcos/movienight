@@ -78,18 +78,21 @@ class _CartScreenState extends State<CartScreen> {
           return Container(
               height: 70,
               child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.ADRESS,
-                        arguments: cart.totalPrice.toStringAsFixed(2));
-                    cart.removeAllProducts();
-                  },
+                  onPressed: cart.productsOnCart.length == 0
+                      ? null
+                      : () {
+                          Navigator.of(context).pushNamed(AppRoutes.ADRESS);
+                        },
                   child: Text(
                     'Buy!',
                     style: TextStyle(fontSize: 24),
                   ),
                   style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                          Color.fromARGB(255, 255, 17, 0)))));
+                    cart.productsOnCart.length == 0
+                        ? Color.fromARGB(224, 54, 54, 54)
+                        : Color.fromARGB(225, 255, 0, 0),
+                  ))));
         },
       ),
     );

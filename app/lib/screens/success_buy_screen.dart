@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:movienight/models/CartStore.dart';
 
@@ -17,19 +18,28 @@ class _SuccessBuyState extends State<SuccessBuy> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Align(
-          child: Center(
-              child: Expanded(
-            child: Container(
-              height: 200,
-              child: Column(
-                children: [
-                  Icon(Icons.check_circle,
-                      size: 128, color: Color.fromARGB(255, 29, 230, 129)),
-                  Text("Oba! Sua compra foi concluída!"),
-                ],
-              ),
-            ),
-          )),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
+                  child: Text(
+                    'Nice!',
+                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                  )),
+              const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  child: Text(
+                    'Your order is being shipped',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  )),
+              Lottie.asset(
+                  "../../assets/lottie/successbuy.json",
+                  animate: true,
+                  frameRate: FrameRate.max,
+                  repeat: false),
+            ],
+          ),
           alignment: Alignment.center),
       bottomNavigationBar: Container(
           height: 70,
@@ -47,37 +57,3 @@ class _SuccessBuyState extends State<SuccessBuy> {
     );
   }
 }
-
-/* 
-Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
-              Row(children: [
-                CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(
-                        'https://i.kym-cdn.com/entries/icons/original/000/033/421/cover2.jpg')),
-                SizedBox(width: 24),
-                Expanded(
-                  child: Text(
-                    'Item Name',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.remove_circle)),
-                Text('Quantidade'),
-                IconButton(onPressed: () {}, icon: Icon(Icons.add_circle))
-              ]),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Total',
-                      style:
-                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
-                  Text('R\$ 99.99')
-                ],
-              )
-            ],
-          ),
-        )*/

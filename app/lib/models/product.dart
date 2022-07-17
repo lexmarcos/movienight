@@ -18,4 +18,13 @@ class Product {
       imageUrl: json['imageUrl'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'name': name,
+      'price': price,
+      'imageUrl': imageUrl,
+    };
+  }
 }

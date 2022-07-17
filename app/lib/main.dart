@@ -4,6 +4,8 @@ import 'package:movienight/screens/cart_screen.dart';
 import 'package:movienight/screens/firstLoad.dart';
 import 'package:movienight/screens/edit_user.dart';
 import 'package:movienight/screens/movie_products_screen.dart';
+import 'package:movienight/screens/order_details.dart';
+import 'package:movienight/screens/order_pages.dart';
 import 'package:movienight/screens/payment_details.dart';
 import 'package:movienight/screens/success_buy_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.SUCCESS_BUY: (ctx) => const SuccessBuy(),
           AppRoutes.ADRESS: (ctx) => const Adress(),
           AppRoutes.PAYMENT_DETAILS: (ctx) => const PaymentDetails(),
+          AppRoutes.ORDER_DETAILS: (ctx) => const OrderDetails(),
+          AppRoutes.ORDERS: (ctx) => const OrderPage(),
         },
       ),
     );

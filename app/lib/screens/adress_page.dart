@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:lottie/lottie.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:movienight/models/cep_data.dart';
 import 'package:movienight/services/apiCEP.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,11 @@ class _AdressState extends State<Adress> {
   String cep = '';
   @override
   Widget build(BuildContext context) {
+    var cepMask = MaskTextInputFormatter(
+        mask: '#####-###',
+        filter: {"#": RegExp(r'[0-9]')},
+        type: MaskAutoCompletionType.lazy);
+
     getCep(String cep) async {
       final ResultCep resultCep = await ApiCEP.get(cep: cep);
       setState(() {
@@ -35,18 +41,26 @@ class _AdressState extends State<Adress> {
     }
 
     setCep(String _cep) {
-      if (_cep.length == 8) {
-        getCep(_cep);
-      }
       setState(() {
         cep = _cep;
       });
     }
 
-    setNumber(String number) {
+    setNumber(String _number) {
       setState(() {
-        number = number;
+        number = _number;
       });
+    }
+
+    isAdressValide() {
+      if (adress.isEmpty ||
+          neighborhood.isEmpty ||
+          city.isEmpty ||
+          state.isEmpty ||
+          number.isEmpty) {
+        return false;
+      }
+      return true;
     }
 
     return Scaffold(body: Consumer<UserStore>(builder: (context, user, child) {
@@ -70,18 +84,19 @@ class _AdressState extends State<Adress> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Lottie.network(
-                        "https://assets3.lottiefiles.com/packages/lf20_svy4ivvy.json",
-                        animate: true,
-                        frameRate: FrameRate.max),
+                    Lottie.asset("../../assets/lottie/adress.json",
+                        animate: true, frameRate: FrameRate.max),
                   ],
                 ),
               ),
               Column(
                 children: [
                   TextField(
+                    inputFormatters: [cepMask],
                     onChanged: (String text) {
-                      setCep(text);
+                      if (cepMask.getMaskedText().length == 9) {
+                        getCep(cepMask.getMaskedText());
+                      }
                     },
                     decoration: const InputDecoration(
                       labelStyle: TextStyle(color: Colors.white),
@@ -155,14 +170,18 @@ class _AdressState extends State<Adress> {
                     child: Container(
                         width: double.infinity,
                         height: 52,
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(225, 255, 0, 0),
+                        decoration: BoxDecoration(
+                            color: !isAdressValide() && cepMask.getMaskedText().isEmpty
+                                ? Color.fromARGB(224, 54, 54, 54)
+                                : Color.fromARGB(225, 255, 0, 0),
                             borderRadius: BorderRadius.all(Radius.circular(8))),
                         child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pushNamed(AppRoutes.PAYMENT_DETAILS);
-                            },
+                            onPressed: !isAdressValide() && cepMask.getMaskedText().isEmpty
+                                ? null
+                                : () {
+                                    Navigator.of(context)
+                                        .pushNamed(AppRoutes.PAYMENT_DETAILS);
+                                  },
                             child: const Text(
                               'Go To Payment',
                               style: TextStyle(
