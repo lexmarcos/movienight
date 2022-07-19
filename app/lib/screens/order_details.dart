@@ -35,7 +35,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                       style:
                           TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
                   Text('R\$ ${arguments.price.toStringAsFixed(2)}',
-                      style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold))
+                      style:
+                          TextStyle(fontSize: 32, fontWeight: FontWeight.bold))
                 ],
               ),
             ),
@@ -51,8 +52,8 @@ class _OrderDetailsState extends State<OrderDetails> {
                           child: Row(children: [
                             CircleAvatar(
                                 radius: 40,
-                                backgroundImage: NetworkImage(
-                                    arguments.products[index].product.imageUrl)),
+                                backgroundImage: NetworkImage(arguments
+                                    .products[index].product.imageUrl)),
                             SizedBox(width: 24),
                             Expanded(
                               child: Column(
@@ -64,7 +65,9 @@ class _OrderDetailsState extends State<OrderDetails> {
                                   ),
                                   Text(
                                     'R\$ ${arguments.products[index].product.price.toStringAsFixed(2)}',
-                                    style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 96, 96, 96)),
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Color.fromARGB(255, 96, 96, 96)),
                                   ),
                                 ],
                               ),
@@ -81,20 +84,26 @@ class _OrderDetailsState extends State<OrderDetails> {
       bottomNavigationBar: Container(
           height: 70,
           child: ElevatedButton(
-              onPressed: arguments.isSuccessfullydDelivery ? null : () {
-                Navigator.of(context).pushNamed(AppRoutes.SCANNER, arguments: arguments);
-              },
+              onPressed: arguments.isSuccessfullydDelivery
+                  ? null
+                  : () {
+                      Navigator.of(context)
+                          .pushNamed(AppRoutes.SCANNER, arguments: arguments);
+                    },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    arguments.isSuccessfullydDelivery ? 'Delivered' : 'Confirm delivery!',
+                    arguments.isSuccessfullydDelivery
+                        ? 'Delivered'
+                        : 'Confirm delivery!',
                     style: TextStyle(fontSize: 24),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8.0),
-                    child: Icon(Icons.thumb_up_sharp, size: 24),
-                  ),
+                  if (arguments.isSuccessfullydDelivery)
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Icon(Icons.thumb_up_sharp),
+                    ),
                 ],
               ),
               style: ButtonStyle(
