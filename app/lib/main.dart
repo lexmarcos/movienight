@@ -7,10 +7,12 @@ import 'package:movienight/screens/movie_products_screen.dart';
 import 'package:movienight/screens/order_details.dart';
 import 'package:movienight/screens/order_pages.dart';
 import 'package:movienight/screens/payment_details.dart';
+import 'package:movienight/screens/qr_code_scanner.dart';
 import 'package:movienight/screens/success_buy_screen.dart';
 import 'package:movienight/screens/login_screen.dart';
 import 'package:movienight/screens/movie_screen.dart';
 import 'package:movienight/screens/signup.dart';
+import 'package:movienight/screens/success_delivered.dart';
 import 'package:movienight/screens/tabs_screen.dart';
 import 'package:movienight/utils/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +70,8 @@ class MyApp extends StatelessWidget {
           AppRoutes.PAYMENT_DETAILS: (ctx) => const PaymentDetails(),
           AppRoutes.ORDER_DETAILS: (ctx) => const OrderDetails(),
           AppRoutes.ORDERS: (ctx) => const OrderPage(),
+          AppRoutes.SCANNER: (ctx) => const QrCodeScanner(),
+          AppRoutes.DELIVERED_SUCCESS: (ctx) => const SuccessDelivered(),
         },
       ),
     );

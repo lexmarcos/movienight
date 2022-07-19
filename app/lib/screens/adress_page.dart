@@ -84,7 +84,7 @@ class _AdressState extends State<Adress> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Lottie.asset("../../assets/lottie/adress.json",
+                    Lottie.asset("assets/lottie/adress.json",
                         animate: true, frameRate: FrameRate.max),
                   ],
                 ),

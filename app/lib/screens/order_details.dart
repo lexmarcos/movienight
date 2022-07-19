@@ -81,12 +81,21 @@ class _OrderDetailsState extends State<OrderDetails> {
       bottomNavigationBar: Container(
           height: 70,
           child: ElevatedButton(
-              onPressed: () {
-                OrdersStore.updateOrder(arguments);
+              onPressed: arguments.isSuccessfullydDelivery ? null : () {
+                Navigator.of(context).pushNamed(AppRoutes.SCANNER, arguments: arguments);
               },
-              child: Text(
-                'Confirm delivery!',
-                style: TextStyle(fontSize: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    arguments.isSuccessfullydDelivery ? 'Delivered' : 'Confirm delivery!',
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Icon(Icons.thumb_up_sharp, size: 24),
+                  ),
+                ],
               ),
               style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(

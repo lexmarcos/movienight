@@ -67,8 +67,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-      - assets/
       - .env
+      - assets/lottie/adress.json
+      - assets/lottie/pay.json
+      - assets/lottie/successbuy.json
+      - assets/lottie/successdelivered.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

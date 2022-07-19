@@ -16,6 +16,8 @@ class AppRoutes {
   static const PAYMENT_DETAILS = '/payment';
   static const ORDER_DETAILS = '/order-details';
   static const ORDERS = '/orders';
+  static const SCANNER = '/scanner';
+  static const DELIVERED_SUCCESS = '/success-delivered';
 }
 
 String getTimeString(int value) {

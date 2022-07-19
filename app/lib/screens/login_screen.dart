@@ -35,6 +35,18 @@ class _LoginScreenState extends State<LoginScreen> {
       final store = context.read<UserStore>();
       Response response = await store.login(username, password);
       const CircularProgressIndicator();
+      SnackBar(
+        action: SnackBarAction(
+          label: 'Action',
+          onPressed: () {
+            // Code to execute.
+          },
+        ),
+        content: Text('Status code ${response.statusCode}'),
+        duration: const Duration(milliseconds: 1500),
+        width: 280.0, // Width of the SnackBar.
+        behavior: SnackBarBehavior.floating,
+      );
       if (response.statusCode == 200) {
         Navigator.of(context).pushReplacementNamed(AppRoutes.HOME);
       }
@@ -134,7 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text("Don't have an account?"),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).pushReplacementNamed(AppRoutes.SIGNUP);
+                        Navigator.of(context)
+                            .pushReplacementNamed(AppRoutes.SIGNUP);
                       },
                       child: const Text("Sign Up",
                           style: TextStyle(

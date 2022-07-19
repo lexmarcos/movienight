@@ -119,7 +119,7 @@ class _PaymentDetailsState extends State<PaymentDetails>
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Lottie.asset("../../assets/lottie/pay.json",
+                        Lottie.asset("assets/lottie/pay.json",
                             animate: true,
                             frameRate: FrameRate.max,
                             reverse: true),

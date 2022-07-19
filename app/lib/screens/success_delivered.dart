@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:movienight/models/order.dart';
+import 'package:movienight/models/ordersStore.dart';
 import 'package:provider/provider.dart';
 import 'package:movienight/models/CartStore.dart';
 
 import '../utils/app_routes.dart';
 
-class SuccessBuy extends StatefulWidget {
-  const SuccessBuy({Key? key}) : super(key: key);
+class SuccessDelivered extends StatefulWidget {
+  const SuccessDelivered({Key? key}) : super(key: key);
 
   @override
-  State<SuccessBuy> createState() => _SuccessBuyState();
+  State<SuccessDelivered> createState() => _SuccessDeliveredState();
 }
 
-class _SuccessBuyState extends State<SuccessBuy> {
+class _SuccessDeliveredState extends State<SuccessDelivered> {
   //final arguments = ModalRoute.of(context)!.settings.arguments;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,21 +26,22 @@ class _SuccessBuyState extends State<SuccessBuy> {
             children: [
               const Padding(
                   padding: EdgeInsets.symmetric(vertical: 0, horizontal: 30),
-                  child: Text(
-                    'Nice!',
-                    style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                  child: Center(
+                    child: Text(
+                      'Thank you!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 45, fontWeight: FontWeight.bold,),
+                    ),
                   )),
               const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   child: Text(
-                    'Your order is being shipped',
+                    'For confirming that your order has been delivered!',
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   )),
-              Lottie.asset(
-                  "assets/lottie/successbuy.json",
-                  animate: true,
-                  frameRate: FrameRate.max,
-                  repeat: false),
+              Lottie.asset("assets/lottie/successdelivered.json",
+                  repeat: false, animate: true, frameRate: FrameRate.max),
             ],
           ),
           alignment: Alignment.center),
@@ -48,7 +52,7 @@ class _SuccessBuyState extends State<SuccessBuy> {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
               },
               child: Text(
-                'Home',
+                'Back to home',
                 style: TextStyle(fontSize: 24),
               ),
               style: ButtonStyle(
